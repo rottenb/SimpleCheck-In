@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Simple Check-In</string>
+
+    <!-- Main Menu -->
+    <string name="main_menu_add">Add Trip</string>
+    <string name="main_menu_edit">Edit Trip List</string>
+    <string name="main_menu_user_settings">User Settings</string>
+    <string name="main_menu_app_settings">App Settings</string>
+
+    <!-- Main Menu (Hold Item) -->
+    <string name="main_menu_hold_item_send">Send Trip</string>
+    <string name="main_menu_hold_item_edit">Edit Trip</string>
+    <string name="main_menu_hold_item_delete">Delete Trip</string>
+
+    <!-- Trip Menu -->
+    <string name="trip_menu_send">Send Trip</string>
+    <string name="trip_menu_edit">Edit Trip</string>
+    <string name="trip_menu_delete">Delete Trip</string>
+
+    <!-- Confirm Yes/No -->
+    <string name="confirm_yes">Yes</string>
+    <string name="confirm_no">No</string>
+
+</resources>
