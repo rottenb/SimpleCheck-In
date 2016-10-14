@@ -21,17 +21,8 @@
         </activity>
         <!-- Display selected trip -->
         <activity
-            android:name=".TripViewerActivity"
-            android:label="@string/trip_viewer_title"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.brianmk.simplecheck_in.MainActivity" />
-        </activity>
-        <!-- Edit trip information -->
-        <activity
-            android:name=".TripEditorActivity"
-            android:label="@string/trip_editor_title"
+            android:name=".TripDetailActivity"
+            android:label="@string/trip_display_title"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

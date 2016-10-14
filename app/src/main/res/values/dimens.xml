@@ -4,7 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-    <!-- Trip Edit Dialog -->
-    <dimen name="trip_edit_font">20sp</dimen>
-    <dimen name="trip_edit_vertical_margin">20dp</dimen>
+    <!-- Trip display (editor and viewer) -->
+    <dimen name="trip_display_font">20sp</dimen>
+    <dimen name="trip_display_vertical_margin">20dp</dimen>
+    <dimen name="trip_display_horizontal_margin">16dp</dimen>
 </resources>

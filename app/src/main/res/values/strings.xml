@@ -29,11 +29,7 @@
     <string name="confirm_yes">Yes</string>
     <string name="confirm_no">No</string>
 
-    <!-- Trip Viewer -->
-    <string name="trip_viewer_title">View Trip</string>
-    <string name="trip_viewer_send">SEND</string>
-
     <!-- Trip Editor -->
-    <string name="trip_editor_title">Edit Trip</string>
+    <string name="trip_display_title">View Trip</string>
 
 </resources>

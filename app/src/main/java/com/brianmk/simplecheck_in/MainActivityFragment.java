@@ -30,7 +30,7 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        String[] dummyTripListData = {
+        final String[] dummyTripListData = {
                 "Bellingham - Chuckanut",
                 "Bellingham - Galbraith",
                 "Nelson - Giveout/Gold Creek",
@@ -68,7 +68,10 @@ public class MainActivityFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(LOG_TAG, "item clicked: " + position);
-                Intent tripIntent = new Intent(getActivity(), TripEditorActivity.class);
+                Intent tripIntent = new Intent(getActivity(), TripDetailActivity.class);
+                tripIntent.putExtra("TITLE", dummyTripListData[position]);
+                tripIntent.putExtra("EDITABLE", false);
+
                 startActivity(tripIntent);
             }
         });
