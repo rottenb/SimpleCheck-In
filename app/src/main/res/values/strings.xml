@@ -17,8 +17,23 @@
     <string name="trip_menu_edit">Edit Trip</string>
     <string name="trip_menu_delete">Delete Trip</string>
 
+    <!-- Trip attributes -->
+    <string name="trip_name">Trip Name</string>
+    <string name="trip_who">Who</string>
+    <string name="trip_where">Where</string>
+    <string name="trip_when_start">When (start)</string>
+    <string name="trip_when_end">When (end)</string>
+    <string name="trip_when_panic">When (panic)</string>
+
     <!-- Confirm Yes/No -->
     <string name="confirm_yes">Yes</string>
     <string name="confirm_no">No</string>
+
+    <!-- Trip Viewer -->
+    <string name="trip_viewer_title">View Trip</string>
+    <string name="trip_viewer_send">SEND</string>
+
+    <!-- Trip Editor -->
+    <string name="trip_editor_title">Edit Trip</string>
 
 </resources>

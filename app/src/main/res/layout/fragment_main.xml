@@ -12,7 +12,8 @@
     tools:showIn="@layout/activity_main">
 
     <ListView
-        android:id="@+id/main_trip_list"
+        android:id="@+id/trip_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+/>
 </RelativeLayout>

@@ -1,10 +1,13 @@
 package com.brianmk.simplecheck_in;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -16,6 +19,8 @@ import java.util.List;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
+
+    private static final String LOG_TAG = MainActivityFragment.class.getSimpleName();
 
     private ArrayAdapter<String> mTripListAdapter;
 
@@ -49,15 +54,24 @@ public class MainActivityFragment extends Fragment {
 
         mTripListAdapter = new ArrayAdapter<> (
                 getActivity(),
-                R.layout.main_trip_list,
-                R.id.main_trip_list_item_textview,
+                R.layout.trip_list_item,
+                R.id.trip_list_item_textview,
                 dummyTripList
         );
 
         View rootView =  inflater.inflate(R.layout.fragment_main, container, false);
 
-        ListView mainTripListView = (ListView) rootView.findViewById(R.id.main_trip_list);
-        mainTripListView.setAdapter(mTripListAdapter);
+        ListView tripListView = (ListView) rootView.findViewById(R.id.trip_list);
+        tripListView.setAdapter(mTripListAdapter);
+
+        tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(LOG_TAG, "item clicked: " + position);
+                Intent tripIntent = new Intent(getActivity(), TripEditorActivity.class);
+                startActivity(tripIntent);
+            }
+        });
 
         return rootView;
     }
