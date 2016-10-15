@@ -16,6 +16,7 @@ import android.widget.Toast;
 public class TripDetailActivity extends AppCompatActivity {
     private static final String LOG_TAG = TripDetailActivity.class.getSimpleName();
 
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
