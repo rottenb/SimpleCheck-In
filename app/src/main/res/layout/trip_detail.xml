@@ -15,25 +15,80 @@
         android:layout_marginTop="@dimen/trip_display_vertical_margin"
         android:cursorVisible="true"
         android:textColor="@color/black"
-        android:hint="@string/trip_name"
+        android:hint="@string/trip_title_default"
         android:textColorHint="@color/black"
         android:backgroundTint="@color/light_grey"
         android:inputType="textCapWords"/>
 
-<!--
     <EditText
-            android:id="@+id/trip_who"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/trip_display_horizontal_margin"
-            android:layout_marginLeft="@dimen/trip_display_horizontal_margin"
-            android:layout_marginTop="@dimen/trip_display_vertical_margin"
-            android:cursorVisible="true"
-            android:textColor="@color/black"
-            android:hint="@string/trip_who"
-            android:textColorHint="@color/black"
-            android:inputType="textLongMessage"/>
--->
+        android:id="@+id/trip_who"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/trip_display_horizontal_margin"
+        android:layout_marginLeft="@dimen/trip_display_horizontal_margin"
+        android:layout_marginTop="@dimen/trip_display_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:cursorVisible="true"
+        android:textColor="@color/black"
+        android:hint="@string/trip_who_default"
+        android:textColorHint="@color/black"
+        android:backgroundTint="@color/light_grey"
+        android:inputType="textCapWords"/>
+
+    <EditText
+        android:id="@+id/trip_where"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/trip_display_horizontal_margin"
+        android:layout_marginLeft="@dimen/trip_display_horizontal_margin"
+        android:layout_marginTop="@dimen/trip_display_vertical_margin"
+        android:cursorVisible="true"
+        android:textColor="@color/black"
+        android:hint="@string/trip_where_default"
+        android:textColorHint="@color/black"
+        android:backgroundTint="@color/light_grey"
+        android:inputType="textCapWords"/>
+
+    <EditText
+        android:id="@+id/trip_when_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/trip_display_horizontal_margin"
+        android:layout_marginLeft="@dimen/trip_display_horizontal_margin"
+        android:layout_marginTop="@dimen/trip_display_vertical_margin"
+        android:cursorVisible="true"
+        android:textColor="@color/black"
+        android:hint="@string/trip_when_start_default"
+        android:textColorHint="@color/black"
+        android:backgroundTint="@color/light_grey"
+        android:inputType="textCapWords"/>
+
+    <EditText
+        android:id="@+id/trip_when_end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/trip_display_horizontal_margin"
+        android:layout_marginLeft="@dimen/trip_display_horizontal_margin"
+        android:cursorVisible="true"
+        android:textColor="@color/black"
+        android:hint="@string/trip_when_end_default"
+        android:textColorHint="@color/black"
+        android:backgroundTint="@color/light_grey"
+        android:inputType="textCapWords"/>
+
+    <EditText
+        android:id="@+id/trip_when_panic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/trip_display_horizontal_margin"
+        android:layout_marginLeft="@dimen/trip_display_horizontal_margin"
+        android:cursorVisible="true"
+        android:textColor="@color/red"
+        android:hint="@string/trip_when_panic_default"
+        android:textColorHint="@color/dark_red"
+        android:backgroundTint="@color/light_grey"
+        android:inputType="textCapWords"/>
+
     <Button
         android:id="@+id/trip_save_button"
         android:layout_width="wrap_content"

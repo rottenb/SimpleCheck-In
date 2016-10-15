@@ -19,4 +19,8 @@
         android:orderInCategory="400"
         android:title="@string/main_menu_app_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/main_menu_delete_db"
+        android:orderInCategory="500"
+        android:title="@string/main_menu_delete"/>
 </menu>
