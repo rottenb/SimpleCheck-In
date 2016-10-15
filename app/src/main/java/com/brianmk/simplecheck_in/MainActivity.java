@@ -17,10 +17,32 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    private final String LOG_TAG = MainActivity.class.getSimpleName();
+    private final static String LOG_TAG = MainActivity.class.getSimpleName();
 
     private ArrayAdapter<String> mTripListAdapter;
+
+    private ListView tripListView;
+
+    private String[] dummyTripListData = {
+            "Bellingham - Chuckanut",
+            "Bellingham - Galbraith",
+            "Nelson - Giveout/Gold Creek",
+            "Nelson - Mountain Station",
+            "Nelson - North Shore",
+            "Nelson - Svoboda Road",
+            "North Vancouver - Fromme",
+            "North Vancouver - Seymour",
+            "West Vancouver - Cypress",
+            "Squamish - Alice Lake",
+            "Squamish - Diamond Head",
+            "Squamish - Red Heather",
+            "Fraser Valley - Sumas",
+            "Fraser Valley - Ledge View",
+            "Whistler - Bike Park",
+            "Whistler - Cheakamus",
+            "Whistler - Lost Lake" };
+
+    private int nPosition = 0;
 
 
     @Override
@@ -30,25 +52,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final String[] dummyTripListData = {
-                "Bellingham - Chuckanut",
-                "Bellingham - Galbraith",
-                "Nelson - Giveout/Gold Creek",
-                "Nelson - Mountain Station",
-                "Nelson - North Shore",
-                "Nelson - Svoboda Road",
-                "North Vancouver - Fromme",
-                "North Vancouver - Seymour",
-                "West Vancouver - Cypress",
-                "Squamish - Alice Lake",
-                "Squamish - Diamond Head",
-                "Squamish - Red Heather",
-                "Fraser Valley - Sumas",
-                "Fraser Valley - Ledge View",
-                "Whistler - Bike Park",
-                "Whistler - Cheakamus",
-                "Whistler - Lost Lake",
-        };
 
         List<String> dummyTripList = new ArrayList<>(Arrays.asList(dummyTripListData));
 
@@ -56,20 +59,32 @@ public class MainActivity extends AppCompatActivity {
                                                         R.id.trip_list_item_textview,
                                                          dummyTripList );
 
-        ListView tripListView = (ListView) findViewById(R.id.trip_list);
+        tripListView = (ListView) findViewById(R.id.trip_list);
+
         tripListView.setAdapter(mTripListAdapter);
+
+        final Intent tripIntent = new Intent(this, TripDetailActivity.class);
 
         tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent tripIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
-                tripIntent.putExtra("TITLE", dummyTripListData[position]);
+                nPosition = position;
+                tripIntent.putExtra("TITLE", mTripListAdapter.getItem(position));
 
-                startActivityForResult(tripIntent, RESULT_OK);
-
-                dummyTripListData[position] = tripIntent.getStringExtra("TITLE");
+                startActivityForResult(tripIntent, 1);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode != 0) {
+            dummyTripListData[nPosition] = data.getStringExtra("TITLE");
+            mTripListAdapter.notifyDataSetChanged();
+            tripListView.setAdapter(mTripListAdapter);
+        }
     }
 
     @Override

@@ -12,7 +12,6 @@ public class TripData {
     public TripData() {
 
     }
-
     public TripData(String t) {
         mTitle = t;
     }
@@ -22,6 +21,6 @@ public class TripData {
     }
 
     public void setTitle(String title) {
-
+        mTitle = title;
     }
 }
