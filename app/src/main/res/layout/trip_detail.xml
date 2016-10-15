@@ -7,31 +7,41 @@
     android:background="@color/white" >
 
     <EditText
-        android:id="@+id/trip_title_edit"
+        android:id="@+id/trip_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/trip_display_horizontal_margin"
         android:layout_marginLeft="@dimen/trip_display_horizontal_margin"
         android:layout_marginTop="@dimen/trip_display_vertical_margin"
         android:cursorVisible="true"
+        android:textColor="@color/black"
         android:hint="@string/trip_name"
         android:textColorHint="@color/black"
         android:backgroundTint="@color/light_grey"
         android:inputType="textCapWords"/>
 
-
+<!--
     <EditText
-        android:id="@+id/trip_who_edit"
-        android:layout_width="match_parent"
+            android:id="@+id/trip_who"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/trip_display_horizontal_margin"
+            android:layout_marginLeft="@dimen/trip_display_horizontal_margin"
+            android:layout_marginTop="@dimen/trip_display_vertical_margin"
+            android:cursorVisible="true"
+            android:textColor="@color/black"
+            android:hint="@string/trip_who"
+            android:textColorHint="@color/black"
+            android:inputType="textLongMessage"/>
+-->
+    <Button
+        android:id="@+id/send_notice_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/trip_display_horizontal_margin"
-        android:layout_marginLeft="@dimen/trip_display_horizontal_margin"
-        android:layout_marginTop="@dimen/trip_display_vertical_margin"
-        android:cursorVisible="true"
-        android:hint="Brian, Kay, Clayton, James, Charlotte"
-        android:textColorHint="@color/black"
-        android:backgroundTint="@color/light_grey"
-        android:inputType="textCapWords"/>
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_gravity="center"
+        android:text="@string/trip_menu_send"/>
+
 
 
 </LinearLayout>

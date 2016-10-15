@@ -13,7 +13,7 @@
     <string name="main_menu_hold_item_delete">Delete Trip</string>
 
     <!-- Trip Menu -->
-    <string name="trip_menu_send">Send Trip</string>
+    <string name="trip_menu_send">Send Trip Notice</string>
     <string name="trip_menu_edit">Edit Trip</string>
     <string name="trip_menu_delete">Delete Trip</string>
 
@@ -30,6 +30,6 @@
     <string name="confirm_no">No</string>
 
     <!-- Trip Editor -->
-    <string name="trip_display_title">View Trip</string>
+    <string name="trip_display_title">Trip Overview</string>
 
 </resources>

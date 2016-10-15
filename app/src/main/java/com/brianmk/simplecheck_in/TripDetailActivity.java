@@ -1,10 +1,11 @@
 package com.brianmk.simplecheck_in;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by rot on 2016-10-14.
@@ -21,14 +22,15 @@ public class TripDetailActivity extends AppCompatActivity {
 
         setContentView(R.layout.trip_detail);
 
-        Intent intent = getIntent();
-        String title = intent.getStringExtra("TITLE");
+        EditText tripView = (EditText) findViewById(R.id.trip_title);
+        tripView.setText(getIntent().getStringExtra("TITLE"));
 
-        EditText tripView = (EditText) findViewById(R.id.trip_title_edit);
-        tripView.setHint(title);
+        Button  sendNoticeButton = (Button) findViewById(R.id.send_notice_button);
+        sendNoticeButton.setOnClickListener(new View.OnClickListener() {
 
-        tripView.setEnabled(intent.getBooleanExtra("EDITABLE", true));
-
-        Log.d(LOG_TAG, title);
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Trip Data Sent!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

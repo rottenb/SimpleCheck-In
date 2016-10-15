@@ -3,7 +3,6 @@ package com.brianmk.simplecheck_in;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
- * A placeholder fragment containing a simple view.
+ * The main activity that the user will do most of their interaction with.
+ *
+ * Provides a list of all trips.  This list will be able to manage and sort.
  */
 public class MainActivityFragment extends Fragment {
 
@@ -30,6 +33,7 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         final String[] dummyTripListData = {
                 "Bellingham - Chuckanut",
                 "Bellingham - Galbraith",
@@ -67,15 +71,16 @@ public class MainActivityFragment extends Fragment {
         tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(LOG_TAG, "item clicked: " + position);
                 Intent tripIntent = new Intent(getActivity(), TripDetailActivity.class);
                 tripIntent.putExtra("TITLE", dummyTripListData[position]);
-                tripIntent.putExtra("EDITABLE", false);
 
-                startActivity(tripIntent);
+                startActivityForResult(tripIntent, RESULT_OK);
+
+                dummyTripListData[position] = tripIntent.getStringExtra("TITLE");
             }
         });
 
         return rootView;
     }
+
 }
