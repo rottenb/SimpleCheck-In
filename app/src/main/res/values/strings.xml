@@ -9,6 +9,7 @@
     <string name="main_menu_delete">Delete Trip Database</string>
 
     <!-- Context Menu (Hold Item) -->
+    <string name="context_menu_send">Send Trip</string>
     <string name="context_menu_delete">Delete Trip</string>
 
     <!-- Trip Menu -->

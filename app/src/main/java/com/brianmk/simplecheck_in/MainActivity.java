@@ -19,8 +19,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private final static String LOG_TAG = MainActivity.class.getSimpleName();
 
+    private List<String> tripTitleList;
     private ArrayAdapter<String> mTripListAdapter;
-
     private ListView tripListView;
 
     @Override
@@ -31,17 +31,44 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         TripDataBase tripDB = new TripDataBase(this);
+
         // If database is empty, populate it *** FOR TESTING ***
         if (!tripDB.isTrips()) {
-            tripDB.addTrip(new TripData("Nelson - Mountain Station", "Brian K"));
-            tripDB.addTrip(new TripData("Nelson - Gold Creek", "Brian K"));
-            tripDB.addTrip(new TripData("Whistler - Bike Park", "Brian K, Kay C"));
-            tripDB.addTrip(new TripData("North Vancouver - Seymour", "Brian K, Kay C, James W"));
-            tripDB.addTrip(new TripData("Fraser Valley - Burke", "Brian K, Kay C, Chris W"));
-            tripDB.addTrip(new TripData("Fraser Valley - Sumas", "Brian K, James W, Clayton M"));
+            tripDB.addTrip(new TripData("Nelson - Mountain Station",
+                    "http://www.trailforks.com/region/mountain-station/",
+                    "Brian K"));
+
+            tripDB.addTrip(new TripData("Nelson - Giveout/Gold Creek",
+                    "http://www.trailforks.com/region/giveout-and-gold-creek/",
+                    "Brian K"));
+
+            tripDB.addTrip(new TripData("Whistler - Bike Park",
+                    "http://www.trailforks.com/region/whistler-mountain-bike-park/",
+                    "Brian K, Kay C"));
+
+            tripDB.addTrip(new TripData("North Vancouver - Seymour",
+                    "http://www.trailforks.com/region/mount-seymour/",
+                    "Brian K, Kay C, James W"));
+
+            tripDB.addTrip(new TripData("Fraser Valley - Burke",
+                    "http://www.trailforks.com/region/burke-mountain/",
+                    "Brian K, Kay C, Chris W"));
+
+            tripDB.addTrip(new TripData("Fraser Valley - Sumas",
+                    "http://www.trailforks.com/region/sumas-mountain/",
+                    "Brian K, James W, Clayton M"));
+
+            tripDB.addTrip(new TripData("Squamish - Diamond Head",
+                    "http://www.trailforks.com/region/diamond-head/",
+                    "Brian K, Kay C, Clayton M, James W"));
+
+            tripDB.addTrip(new TripData("Squamish - Alice Lake",
+                    "http://www.trailforks.com/region/alice-lake--highlands/",
+                    "Brian K, Ryan B, Ashley S"));
+
         }
 
-        List<String> tripTitleList = tripDB.getAllTripTitles();
+        tripTitleList = tripDB.getAllTripTitles();
         tripTitleList.add(0, "-- Tap To Add New Trip --");
 
         mTripListAdapter = new ArrayAdapter<> (this, R.layout.trip_list_item,
@@ -59,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent tripIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
                 tripIntent.putExtra("POSITION", position);
+                tripIntent.putExtra("TITLE", tripTitleList.get(position));
 
                 startActivity(tripIntent);
             }
@@ -70,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreateContextMenu(menu, v, menuInfo);
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        Log.d(LOG_TAG, "CONTEXT MENU: " + info.position);
 
         if (info.position == 0)
             return; // No menu
@@ -85,16 +112,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.context_menu_delete:
                 AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
+                // Delete the trip entry, find it in the database through it's title
                 TripDataBase tdb = new TripDataBase(getApplicationContext());
-                tdb.deleteTrip(info.position);
+                tdb.deleteTrip(tripTitleList.get(info.position));
 
-                List<TripData> list = tdb.getAllTrips();
-                for (int i = 0; i < list.size(); i++) {
-                    Log.d(LOG_TAG, "id: " + list.get(i).getId() + " title: " + list.get(i).getTitle());
-                }
+                mTripListAdapter.remove(tripTitleList.get(info.position));
 
                 tdb.close();
 
+                break;
+            default:
+                Log.d(LOG_TAG, "onContextItemSelected: FELL THROUGH!");
                 break;
         }
         return true;
@@ -151,5 +179,39 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void populateTripDB(TripDataBase tdb) {
+        tdb.addTrip(new TripData("Nelson - Mountain Station",
+                                "http://www.trailforks.com/region/mountain-station/",
+                                "Brian K"));
+
+        tdb.addTrip(new TripData("Nelson - Giveout/Gold Creek",
+                                "http://www.trailforks.com/region/giveout-and-gold-creek/",
+                                "Brian K"));
+
+        tdb.addTrip(new TripData("Whistler - Bike Park",
+                                "http://www.trailforks.com/region/whistler-mountain-bike-park/",
+                                "Brian K, Kay C"));
+
+        tdb.addTrip(new TripData("North Vancouver - Seymour",
+                                "http://www.trailforks.com/region/mount-seymour/",
+                                "Brian K, Kay C, James W"));
+
+        tdb.addTrip(new TripData("Fraser Valley - Burke",
+                                "http://www.trailforks.com/region/burke-mountain/",
+                                "Brian K, Kay C, Chris W"));
+
+        tdb.addTrip(new TripData("Fraser Valley - Sumas",
+                                "http://www.trailforks.com/region/sumas-mountain/",
+                                "Brian K, James W, Clayton M"));
+
+        tdb.addTrip(new TripData("Squamish - Diamond Head",
+                                "http://www.trailforks.com/region/diamond-head/",
+                                "Brian K, Kay C, Clayton M, James W"));
+
+        tdb.addTrip(new TripData("Squamish - Alice Lake",
+                                "http://www.trailforks.com/region/alice-lake--highlands/",
+                                "Brian K, Ryan B, Ashley S"));
     }
 }

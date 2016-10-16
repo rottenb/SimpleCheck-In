@@ -18,7 +18,7 @@ public class TripData {
 
     private String mTitle;
     private String mWho;
-
+    private String mLocation;
     private String mWhenStart;
     private String mWhenEnd;
     private String mWhenPanic;
@@ -28,16 +28,17 @@ public class TripData {
         this.mId = 0;
         this.mTitle = "Where";
         this.mWho = "Who";
+        this.mLocation = "http://www.trailforks.com";
         this.mWhenStart = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenEnd = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenPanic = DateFormat.getDateTimeInstance().format(new Date());
     }
 
-    public TripData(String title, String who) {
+    public TripData(String title, String location, String who) {
         this.mId = id;
         this.mTitle = title;
+        this.mLocation = location;
         this.mWho = who;
-
         this.mWhenStart = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenEnd = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenPanic = DateFormat.getDateTimeInstance().format(new Date());
@@ -45,8 +46,9 @@ public class TripData {
 
     @Override
     public String toString() {
-        return "TripData [id=" + mId + ", title=" + mTitle + ", who=" + mWho +
-                ", start=" + mWhenStart + ", end=" + mWhenEnd + ", panic =" + mWhenPanic + "]";
+        return "TripData [id=" + mId + ", title=" + mTitle + ", location=" + mLocation +
+                ", who=" + mWho + ", start=" + mWhenStart + ", end=" + mWhenEnd +
+                ", panic =" + mWhenPanic + "]";
     }
 
     public void setId(int id) {
@@ -61,6 +63,13 @@ public class TripData {
     }
     public String getTitle() {
         return mTitle;
+    }
+
+    public void setLocation(String location) {
+        this.mLocation = location;
+    }
+    public String getLocation() {
+        return this.mLocation;
     }
 
     public void setWho(String who) {

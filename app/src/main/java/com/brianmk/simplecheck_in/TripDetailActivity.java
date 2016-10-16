@@ -16,7 +16,6 @@ import android.widget.Toast;
 public class TripDetailActivity extends AppCompatActivity {
     private static final String LOG_TAG = TripDetailActivity.class.getSimpleName();
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,15 +23,16 @@ public class TripDetailActivity extends AppCompatActivity {
         setContentView(R.layout.trip_detail);
 
         final int position = getIntent().getIntExtra("POSITION", 0);
+        final String title = getIntent().getStringExtra("TITLE");
 
         if (position != 0) {
-
             TripDataBase tripDataBase = new TripDataBase(this);
-            TripData tripData = tripDataBase.getTrip(position);
+            TripData tripData = tripDataBase.getTrip(title);
 
             EditText tripView = (EditText) findViewById(R.id.trip_title);
-
             tripView.setText(tripData.getTitle());
+            tripView = (EditText) findViewById(R.id.trip_location);
+            tripView.setText(tripData.getLocation());
             tripView = (EditText) findViewById(R.id.trip_who);
             tripView.setText(tripData.getWho());
             tripView = (EditText) findViewById(R.id.trip_when_start);
@@ -51,6 +51,8 @@ public class TripDetailActivity extends AppCompatActivity {
 
                 EditText tripView = (EditText) findViewById(R.id.trip_title);
                 tripData.setTitle(tripView.getText().toString());
+                tripView = (EditText) findViewById(R.id.trip_location);
+                tripData.setLocation(tripView.getText().toString());
                 tripView = (EditText) findViewById(R.id.trip_who);
                 tripData.setWho(tripView.getText().toString());
                 tripView = (EditText) findViewById(R.id.trip_when_start);

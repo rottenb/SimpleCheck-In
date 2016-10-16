@@ -36,7 +36,7 @@
         android:inputType="textCapWords"/>
 
     <EditText
-        android:id="@+id/trip_where"
+        android:id="@+id/trip_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/trip_display_horizontal_margin"
@@ -47,7 +47,8 @@
         android:hint="@string/trip_where_default"
         android:textColorHint="@color/black"
         android:backgroundTint="@color/light_grey"
-        android:inputType="textCapWords"/>
+        android:autoLink="web"
+        android:inputType="textUri"/>
 
     <EditText
         android:id="@+id/trip_when_start"

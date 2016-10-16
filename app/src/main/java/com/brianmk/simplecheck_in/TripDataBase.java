@@ -28,12 +28,21 @@ public class TripDataBase extends SQLiteOpenHelper  {
 
     private static final String KEY_ID = "id";
     private static final String KEY_TITLE = "title";
+    private static final String KEY_LOCATION = "location";
     private static final String KEY_WHO = "who";
     private static final String KEY_START = "start";
     private static final String KEY_END = "end";
     private static final String KEY_PANIC = "panic";
 
-    private static final String[] COLUMNS = {KEY_ID, KEY_TITLE, KEY_WHO,
+    private static final int ID_OFFSET = 0;
+    private static final int TITLE_OFFSET = 1;
+    private static final int LOCATION_OFFSET = 2;
+    private static final int WHO_OFFSET = 3;
+    private static final int WHEN_START_OFFSET = 4;
+    private static final int WHEN_END_OFFSET = 5;
+    private static final int WHEN_PANIC_OFFSET = 6;
+
+    private static final String[] COLUMNS = {KEY_ID, KEY_TITLE, KEY_LOCATION, KEY_WHO,
                                                 KEY_START, KEY_END, KEY_PANIC};
 
     public TripDataBase(Context context) {
@@ -45,6 +54,7 @@ public class TripDataBase extends SQLiteOpenHelper  {
         String CREATE_TRIP_TABLE = "CREATE TABLE trips ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "title TEXT, " +
+                "location TEXT, " +
                 "who TEXT, " +
                 "start TEXT, end TEXT, panic TEXT )";
 
@@ -79,6 +89,7 @@ public class TripDataBase extends SQLiteOpenHelper  {
 
         ContentValues values = new ContentValues();
         values.put(KEY_TITLE, tripData.getTitle());
+        values.put(KEY_LOCATION, tripData.getLocation());
         values.put(KEY_WHO, tripData.getWho());
         values.put(KEY_START, tripData.getWhenStart());
         values.put(KEY_END, tripData.getWhenEnd());
@@ -89,8 +100,6 @@ public class TripDataBase extends SQLiteOpenHelper  {
     } // addTrip()
 
     public TripData getTrip(int id) {
-        Log.d(LOG_TAG, "getTrip("+id+")");
-
         SQLiteDatabase db = getReadableDatabase();
 
         Cursor cursor = db.query(
@@ -108,17 +117,49 @@ public class TripDataBase extends SQLiteOpenHelper  {
         }
 
         TripData tripData = new TripData();
-        tripData.setId(Integer.parseInt(cursor.getString(0)));
-        tripData.setTitle(cursor.getString(1));
-        tripData.setWho(cursor.getString(2));
+        tripData.setId(Integer.parseInt(cursor.getString(ID_OFFSET)));
+        tripData.setTitle(cursor.getString(TITLE_OFFSET));
+        tripData.setTitle(cursor.getString(LOCATION_OFFSET));
+        tripData.setWho(cursor.getString(WHO_OFFSET));
         tripData.setWhenStart(DateFormat.getDateTimeInstance().format(new Date()));
         tripData.setWhenEnd(DateFormat.getDateTimeInstance().format(new Date()));
         tripData.setWhenPanic(DateFormat.getDateTimeInstance().format(new Date()));
 
-        Log.d(LOG_TAG, tripData.toString());
         cursor.close();
+
         return tripData;
     } // getTrip()
+
+    public TripData getTrip(String title) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.query(
+                TABLE_TRIPS,
+                COLUMNS,
+                " title = ?",
+                new String[] {String.valueOf(title)},
+                null,
+                null,
+                null,
+                null );
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        TripData tripData = new TripData();
+        tripData.setId(Integer.parseInt(cursor.getString(ID_OFFSET)));
+        tripData.setTitle(cursor.getString(TITLE_OFFSET));
+        tripData.setLocation(cursor.getString(LOCATION_OFFSET));
+        tripData.setWho(cursor.getString(WHO_OFFSET));
+        tripData.setWhenStart(DateFormat.getDateTimeInstance().format(new Date()));
+        tripData.setWhenEnd(DateFormat.getDateTimeInstance().format(new Date()));
+        tripData.setWhenPanic(DateFormat.getDateTimeInstance().format(new Date()));
+
+        cursor.close();
+
+        return tripData;
+    }
 
     public List<TripData> getAllTrips() {
         List<TripData> trips = new LinkedList<>();
@@ -132,9 +173,10 @@ public class TripDataBase extends SQLiteOpenHelper  {
         if (cursor.moveToFirst()) {
             do {
                 tripData = new TripData();
-                tripData.setId(Integer.parseInt(cursor.getString(0)));
-                tripData.setTitle(cursor.getString(1));
-                tripData.setWho(cursor.getString(2));
+                tripData.setId(Integer.parseInt(cursor.getString(ID_OFFSET)));
+                tripData.setTitle(cursor.getString(TITLE_OFFSET));
+                tripData.setLocation(cursor.getString(LOCATION_OFFSET));
+                tripData.setWho(cursor.getString(WHO_OFFSET));
                 tripData.setWhenStart(DateFormat.getDateTimeInstance().format(new Date()));
                 tripData.setWhenEnd(DateFormat.getDateTimeInstance().format(new Date()));
                 tripData.setWhenPanic(DateFormat.getDateTimeInstance().format(new Date()));
@@ -172,14 +214,20 @@ public class TripDataBase extends SQLiteOpenHelper  {
 
         db.delete(TABLE_TRIPS, KEY_ID + " = ?", new String[] {String.valueOf(tripData.getId())});
         db.close();
-    } //deleteTrip()
+    } //deleteTrip(TripData)
 
     public void deleteTrip(int position) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.delete(TABLE_TRIPS, KEY_ID + " = ?", new String[] {String.valueOf(position)});
         db.close();
-    }
+    } //deleteTrip(int)
+
+    public void deleteTrip(String title) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_TRIPS, KEY_TITLE + " = ?", new String[] {title});
+    } // deleteTrip(String)
 
     public void deleteALLTripDB(Context context) {
         context.deleteDatabase(DATABASE_NAME);
@@ -190,6 +238,7 @@ public class TripDataBase extends SQLiteOpenHelper  {
 
         ContentValues values = new ContentValues();
         values.put(KEY_TITLE, tripData.getTitle());
+        values.put(KEY_LOCATION, tripData.getLocation());
         values.put(KEY_WHO, tripData.getWho());
         values.put(KEY_START, tripData.getWhenStart());
         values.put(KEY_END, tripData.getWhenEnd());
@@ -206,4 +255,6 @@ public class TripDataBase extends SQLiteOpenHelper  {
 
         return i;
     } // updateTrip()
-}
+
+
+} // TripDataBase
