@@ -18,7 +18,7 @@ import java.util.List;
  * Simple class containing all data for a single trip
  */
 
-class TripDataBase extends SQLiteOpenHelper  {
+public class TripDataBase extends SQLiteOpenHelper  {
     private static final String LOG_TAG = TripDataBase.class.getSimpleName();
 
     private static final int DATABASE_VERSION = 1;
@@ -36,7 +36,7 @@ class TripDataBase extends SQLiteOpenHelper  {
     private static final String[] COLUMNS = {KEY_ID, KEY_TITLE, KEY_WHO,
                                                 KEY_START, KEY_END, KEY_PANIC};
 
-    TripDataBase(Context context) {
+    public TripDataBase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -59,7 +59,7 @@ class TripDataBase extends SQLiteOpenHelper  {
         this.onCreate(db);
     }
 
-    boolean isTrips() {
+    public boolean isTrips() {
         String query = "SELECT * FROM " + TABLE_TRIPS;
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -72,7 +72,7 @@ class TripDataBase extends SQLiteOpenHelper  {
         return result;
     }
 
-    void addTrip(TripData tripData) {
+    public void addTrip(TripData tripData) {
         Log.d(LOG_TAG, "addTrip("+tripData.toString()+")");
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -88,7 +88,7 @@ class TripDataBase extends SQLiteOpenHelper  {
         db.close();
     } // addTrip()
 
-    TripData getTrip(int id) {
+    public TripData getTrip(int id) {
         Log.d(LOG_TAG, "getTrip("+id+")");
 
         SQLiteDatabase db = getReadableDatabase();
@@ -143,14 +143,12 @@ class TripDataBase extends SQLiteOpenHelper  {
             } while (cursor.moveToNext());
         }
 
-        Log.d(LOG_TAG, "getAllTrips()" + trips.toString());
-
         cursor.close();
         return trips;
 
     } // getAllTrips()
 
-    List<String> getAllTripTitles() {
+    public List<String> getAllTripTitles() {
         List<String> titles = new LinkedList<>();
 
         String query = "SELECT * FROM " + TABLE_TRIPS;
@@ -159,18 +157,9 @@ class TripDataBase extends SQLiteOpenHelper  {
         Cursor cursor = db.rawQuery(query, null);
 
         TripData tripData;
-
         if (cursor.moveToFirst()) {
             do {
-                tripData = new TripData();
-                tripData.setId(Integer.parseInt(cursor.getString(0)));
-                tripData.setTitle(cursor.getString(1));
-                tripData.setWho(cursor.getString(2));
-                tripData.setWhenStart(DateFormat.getDateTimeInstance().format(new Date()));
-                tripData.setWhenEnd(DateFormat.getDateTimeInstance().format(new Date()));
-                tripData.setWhenPanic(DateFormat.getDateTimeInstance().format(new Date()));
-
-                titles.add(tripData.getTitle());
+                titles.add(cursor.getString(1));
             } while (cursor.moveToNext());
         }
 
@@ -178,7 +167,43 @@ class TripDataBase extends SQLiteOpenHelper  {
         return titles;
     } // getAllTripTitles()
 
-    void deleteALLTripDB(Context context) {
-        context.deleteDatabase(DATABASE_NAME);
+    public void deleteTrip(TripData tripData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_TRIPS, KEY_ID + " = ?", new String[] {String.valueOf(tripData.getId())});
+        db.close();
+    } //deleteTrip()
+
+    public void deleteTrip(int position) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_TRIPS, KEY_ID + " = ?", new String[] {String.valueOf(position)});
+        db.close();
     }
+
+    public void deleteALLTripDB(Context context) {
+        context.deleteDatabase(DATABASE_NAME);
+    } // deleteAllTripDB()
+
+    public int updateTrip(TripData tripData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_TITLE, tripData.getTitle());
+        values.put(KEY_WHO, tripData.getWho());
+        values.put(KEY_START, tripData.getWhenStart());
+        values.put(KEY_END, tripData.getWhenEnd());
+        values.put(KEY_PANIC, tripData.getWhenPanic());
+
+        int i = db.update(TABLE_TRIPS,
+                values,
+                KEY_ID+" = ?",
+                new String[] { String.valueOf(tripData.getId()) } );
+
+        db.close();
+
+        Log.d(LOG_TAG, "updateTrip() " + tripData.getId());
+
+        return i;
+    } // updateTrip()
 }

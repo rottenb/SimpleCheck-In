@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,28 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> mTripListAdapter;
 
     private ListView tripListView;
-/*
-    private String[] dummyTripListData = {
-            "Bellingham - Chuckanut",
-            "Bellingham - Galbraith",
-            "Nelson - Giveout/Gold Creek",
-            "Nelson - Mountain Station",
-            "Nelson - North Shore",
-            "Nelson - Svoboda Road",
-            "North Vancouver - Fromme",
-            "North Vancouver - Seymour",
-            "West Vancouver - Cypress",
-            "Squamish - Alice Lake",
-            "Squamish - Diamond Head",
-            "Squamish - Red Heather",
-            "Fraser Valley - Sumas",
-            "Fraser Valley - Ledge View",
-            "Whistler - Bike Park",
-            "Whistler - Cheakamus",
-            "Whistler - Lost Lake" };
-
-    private int nPosition = 0;
-*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         TripDataBase tripDB = new TripDataBase(this);
+        // If database is empty, populate it *** FOR TESTING ***
         if (!tripDB.isTrips()) {
             tripDB.addTrip(new TripData("Nelson - Mountain Station", "Brian K"));
             tripDB.addTrip(new TripData("Nelson - Gold Creek", "Brian K"));
@@ -60,45 +41,68 @@ public class MainActivity extends AppCompatActivity {
             tripDB.addTrip(new TripData("Fraser Valley - Sumas", "Brian K, James W, Clayton M"));
         }
 
-        //List<String> tripTitleList = new ArrayList<>(Arrays.asList(dummyTripListData));
-
         List<String> tripTitleList = tripDB.getAllTripTitles();
         tripTitleList.add(0, "-- Tap To Add New Trip --");
 
-
         mTripListAdapter = new ArrayAdapter<> (this, R.layout.trip_list_item,
-                                                        R.id.trip_list_item_textview,
-                                                         tripTitleList );
-
+                                                R.id.trip_list_item_textview,
+                                                tripTitleList );
         tripListView = (ListView) findViewById(R.id.trip_list);
-
         tripListView.setAdapter(mTripListAdapter);
 
-        final Intent tripIntent = new Intent(this, TripDetailActivity.class);
+        registerForContextMenu(tripListView);
 
+
+        // Tapping on a list item brings up the trip details overview
         tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-             //   nPosition = position;
-             //   tripIntent.putExtra("TITLE", mTripListAdapter.getItem(position));
-
+                Intent tripIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
                 tripIntent.putExtra("POSITION", position);
 
-                startActivityForResult(tripIntent, 1);
+                startActivity(tripIntent);
             }
         });
     } // onCreate()
 
     @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        Log.d(LOG_TAG, "CONTEXT MENU: " + info.position);
+
+        if (info.position == 0)
+            return; // No menu
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.context_menu_delete:
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+                TripDataBase tdb = new TripDataBase(getApplicationContext());
+                tdb.deleteTrip(info.position);
+
+                List<TripData> list = tdb.getAllTrips();
+                for (int i = 0; i < list.size(); i++) {
+                    Log.d(LOG_TAG, "id: " + list.get(i).getId() + " title: " + list.get(i).getTitle());
+                }
+
+                tdb.close();
+
+                break;
+        }
+        return true;
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-/*
-        if (resultCode != 0) {
-            dummyTripListData[nPosition] = data.getStringExtra("TITLE");
-            mTripListAdapter.notifyDataSetChanged();
-            tripListView.setAdapter(mTripListAdapter);
-        }
-*/
     } // onActivityResult()
 
     @Override

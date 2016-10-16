@@ -11,7 +11,7 @@ import static android.R.attr.id;
  * Holds the data for a single trip
  */
 
-class TripData {
+public class TripData {
     private static final String LOG_TAG = TripData.class.getSimpleName();
 
     private int mId;
@@ -24,7 +24,7 @@ class TripData {
     private String mWhenPanic;
 
 
-    TripData() {
+    public TripData() {
         this.mId = 0;
         this.mTitle = "Where";
         this.mWho = "Who";
@@ -33,7 +33,7 @@ class TripData {
         this.mWhenPanic = DateFormat.getDateTimeInstance().format(new Date());
     }
 
-    TripData(String title, String who) {
+    public TripData(String title, String who) {
         this.mId = id;
         this.mTitle = title;
         this.mWho = who;
@@ -49,45 +49,45 @@ class TripData {
                 ", start=" + mWhenStart + ", end=" + mWhenEnd + ", panic =" + mWhenPanic + "]";
     }
 
-    void setId(int id) {
+    public void setId(int id) {
         this.mId = id;
     }
-    int getId() {
+    public int getId() {
         return mId;
     }
 
-    void setTitle(String title) {
+    public void setTitle(String title) {
         this.mTitle = title;
     }
-    String getTitle() {
+    public String getTitle() {
         return mTitle;
     }
 
-    void setWho(String who) {
+    public void setWho(String who) {
         this.mWho = who;
     }
-    String getWho() {
+    public String getWho() {
         return mWho;
     }
 
-    void setWhenStart(String dateTime) {
+    public void setWhenStart(String dateTime) {
         this.mWhenStart = dateTime;
     }
-    String getWhenStart() {
+    public String getWhenStart() {
         return this.mWhenStart;
     }
 
-    void setWhenEnd(String dateTime) {
+    public void setWhenEnd(String dateTime) {
         this.mWhenEnd = dateTime;
     }
-    String getWhenEnd() {
+    public String getWhenEnd() {
         return this.mWhenEnd;
     }
 
-    void setWhenPanic(String dateTime) {
+    public void setWhenPanic(String dateTime) {
         this.mWhenPanic = dateTime;
     }
-    String getWhenPanic() {
+    public String getWhenPanic() {
         return mWhenPanic;
     }
 

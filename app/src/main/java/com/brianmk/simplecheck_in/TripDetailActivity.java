@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by rot on 2016-10-14.
@@ -22,7 +23,7 @@ public class TripDetailActivity extends AppCompatActivity {
 
         setContentView(R.layout.trip_detail);
 
-        int position = getIntent().getIntExtra("POSITION", 0);
+        final int position = getIntent().getIntExtra("POSITION", 0);
 
         if (position != 0) {
 
@@ -41,16 +42,34 @@ public class TripDetailActivity extends AppCompatActivity {
             tripView = (EditText) findViewById(R.id.trip_when_panic);
             tripView.setText(tripData.getWhenPanic());
         }
+
         Button  sendNoticeButton = (Button) findViewById(R.id.trip_save_button);
         sendNoticeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-/*                Intent data = new Intent();
-                data.putExtra("TITLE", tripView.getText().toString());
-                setResult(1, data);
-*/
-   //             Toast.makeText(getApplicationContext(), tripView.getText().toString(), Toast.LENGTH_SHORT).show();
+                TripDataBase tdb = new TripDataBase(getApplicationContext());
+                TripData tripData = new TripData();
 
-//                finish();
+                EditText tripView = (EditText) findViewById(R.id.trip_title);
+                tripData.setTitle(tripView.getText().toString());
+                tripView = (EditText) findViewById(R.id.trip_who);
+                tripData.setWho(tripView.getText().toString());
+                tripView = (EditText) findViewById(R.id.trip_when_start);
+                tripData.setWhenStart(tripView.getText().toString());
+                tripView = (EditText) findViewById(R.id.trip_when_end);
+                tripData.setWhenEnd(tripView.getText().toString());
+                tripView = (EditText) findViewById(R.id.trip_when_panic);
+                tripData.setWhenPanic(tripView.getText().toString());
+
+                if (position == 0) {
+                    tdb.addTrip(tripData);
+                } else {
+                    tripData.setId(position);
+                    tdb.updateTrip(tripData);
+                }
+
+                tdb.close();
+
+                Toast.makeText(getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show();
             }
 
         });

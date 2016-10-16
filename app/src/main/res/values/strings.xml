@@ -8,10 +8,8 @@
     <string name="main_menu_app_settings">App Settings</string>
     <string name="main_menu_delete">Delete Trip Database</string>
 
-    <!-- Main Menu (Hold Item) -->
-    <string name="main_menu_hold_item_send">Send Trip</string>
-    <string name="main_menu_hold_item_edit">Edit Trip</string>
-    <string name="main_menu_hold_item_delete">Delete Trip</string>
+    <!-- Context Menu (Hold Item) -->
+    <string name="context_menu_delete">Delete Trip</string>
 
     <!-- Trip Menu -->
     <string name="trip_save">Save Trip</string>
