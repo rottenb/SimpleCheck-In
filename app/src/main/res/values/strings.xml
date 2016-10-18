@@ -7,6 +7,7 @@
     <string name="main_menu_user_settings">User Settings</string>
     <string name="main_menu_app_settings">App Settings</string>
     <string name="main_menu_delete">Delete Trip Database</string>
+    <string name="main_menu_create">Create Trip Database</string>
 
     <!-- Context Menu (Hold Item) -->
     <string name="context_menu_send">Send Trip</string>

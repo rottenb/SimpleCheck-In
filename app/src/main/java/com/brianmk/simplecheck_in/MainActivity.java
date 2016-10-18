@@ -1,5 +1,6 @@
 package com.brianmk.simplecheck_in;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,40 +34,9 @@ public class MainActivity extends AppCompatActivity {
         TripDataBase tripDB = new TripDataBase(this);
 
         // If database is empty, populate it *** FOR TESTING ***
-        if (!tripDB.isTrips()) {
-            tripDB.addTrip(new TripData("Nelson - Mountain Station",
-                    "http://www.trailforks.com/region/mountain-station/",
-                    "Brian K"));
-
-            tripDB.addTrip(new TripData("Nelson - Giveout/Gold Creek",
-                    "http://www.trailforks.com/region/giveout-and-gold-creek/",
-                    "Brian K"));
-
-            tripDB.addTrip(new TripData("Whistler - Bike Park",
-                    "http://www.trailforks.com/region/whistler-mountain-bike-park/",
-                    "Brian K, Kay C"));
-
-            tripDB.addTrip(new TripData("North Vancouver - Seymour",
-                    "http://www.trailforks.com/region/mount-seymour/",
-                    "Brian K, Kay C, James W"));
-
-            tripDB.addTrip(new TripData("Fraser Valley - Burke",
-                    "http://www.trailforks.com/region/burke-mountain/",
-                    "Brian K, Kay C, Chris W"));
-
-            tripDB.addTrip(new TripData("Fraser Valley - Sumas",
-                    "http://www.trailforks.com/region/sumas-mountain/",
-                    "Brian K, James W, Clayton M"));
-
-            tripDB.addTrip(new TripData("Squamish - Diamond Head",
-                    "http://www.trailforks.com/region/diamond-head/",
-                    "Brian K, Kay C, Clayton M, James W"));
-
-            tripDB.addTrip(new TripData("Squamish - Alice Lake",
-                    "http://www.trailforks.com/region/alice-lake--highlands/",
-                    "Brian K, Ryan B, Ashley S"));
-
-        }
+//        if (!tripDB.isTrips()) {
+//            populateTripDB(tripDB);
+//        }
 
         tripTitleList = tripDB.getAllTripTitles();
         tripTitleList.add(0, "-- Tap To Add New Trip --");
@@ -84,11 +54,18 @@ public class MainActivity extends AppCompatActivity {
         tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent tripIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
-                tripIntent.putExtra("POSITION", position);
-                tripIntent.putExtra("TITLE", tripTitleList.get(position));
-
-                startActivity(tripIntent);
+                if (position == 0) {
+                    Intent tripIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
+                    tripIntent.putExtra("LIST_POSITION", position);
+                    tripIntent.putExtra("LIST_TITLE", tripTitleList.get(position));
+                    startActivity(tripIntent);
+                } else {
+                    DialogFragment dialog = new TripDialog();
+                    Bundle args = new Bundle();
+                    args.putString("LIST_TITLE", tripTitleList.get(position));
+                    dialog.setArguments(args);
+                    dialog.show(getFragmentManager(), "Trip Details");
+                }
             }
         });
     } // onCreate()
@@ -121,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 tdb.close();
 
                 break;
+
             default:
                 Log.d(LOG_TAG, "onContextItemSelected: FELL THROUGH!");
                 break;
@@ -147,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        TripDataBase tdb = new TripDataBase(this);
+
         // Menu items
         switch (id) {
             case R.id.main_menu_add:
@@ -164,14 +144,24 @@ public class MainActivity extends AppCompatActivity {
             case R.id.main_menu_delete_db:
                 Log.d(LOG_TAG, "DELETE DATABASE");
 
-                TripDataBase tdb = new TripDataBase(this);
                 tdb.deleteALLTripDB(this);
 
                 mTripListAdapter.notifyDataSetChanged();
                 tripListView.setAdapter(mTripListAdapter);
 
                 tdb.close();
-                finish();
+
+                break;
+            case R.id.main_menu_create_db:
+                Log.d(LOG_TAG, "CREATE DATABASE");
+
+                populateTripDB(tdb);
+                
+                mTripListAdapter.notifyDataSetChanged();
+                tripListView.setAdapter(mTripListAdapter);
+
+                tdb.close();
+
                 break;
             default:
                 Log.d(LOG_TAG, "Oops, fell through");

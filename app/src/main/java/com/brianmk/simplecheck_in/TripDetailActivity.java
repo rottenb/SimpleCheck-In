@@ -20,10 +20,10 @@ public class TripDetailActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.trip_detail);
+        setContentView(R.layout.trip_edit);
 
-        final int position = getIntent().getIntExtra("POSITION", 0);
-        final String title = getIntent().getStringExtra("TITLE");
+        final int position = getIntent().getIntExtra("LIST_POSITION", 0);
+        final String title = getIntent().getStringExtra("LIST_TITLE");
 
         if (position != 0) {
             TripDataBase tripDataBase = new TripDataBase(this);

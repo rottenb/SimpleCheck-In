@@ -18,7 +18,8 @@
         android:hint="@string/trip_title_default"
         android:textColorHint="@color/black"
         android:backgroundTint="@color/light_grey"
-        android:inputType="textCapWords"/>
+        android:inputType="textCapWords"
+        android:layout_weight="0"/>
 
     <EditText
         android:id="@+id/trip_who"
@@ -33,7 +34,8 @@
         android:hint="@string/trip_who_default"
         android:textColorHint="@color/black"
         android:backgroundTint="@color/light_grey"
-        android:inputType="textCapWords"/>
+        android:inputType="textCapWords"
+        android:layout_weight="0"/>
 
     <EditText
         android:id="@+id/trip_location"
@@ -47,8 +49,8 @@
         android:hint="@string/trip_where_default"
         android:textColorHint="@color/black"
         android:backgroundTint="@color/light_grey"
-        android:autoLink="web"
-        android:inputType="textUri"/>
+        android:inputType="textUri"
+        android:layout_weight="0"/>
 
     <EditText
         android:id="@+id/trip_when_start"
@@ -62,7 +64,8 @@
         android:hint="@string/trip_when_start_default"
         android:textColorHint="@color/black"
         android:backgroundTint="@color/light_grey"
-        android:inputType="textCapWords"/>
+        android:inputType="textCapWords"
+        android:layout_weight="0"/>
 
     <EditText
         android:id="@+id/trip_when_end"
@@ -75,7 +78,8 @@
         android:hint="@string/trip_when_end_default"
         android:textColorHint="@color/black"
         android:backgroundTint="@color/light_grey"
-        android:inputType="textCapWords"/>
+        android:inputType="textCapWords"
+        android:layout_weight="0"/>
 
     <EditText
         android:id="@+id/trip_when_panic"
@@ -88,15 +92,23 @@
         android:hint="@string/trip_when_panic_default"
         android:textColorHint="@color/dark_red"
         android:backgroundTint="@color/light_grey"
-        android:inputType="textCapWords"/>
+        android:inputType="textCapWords"
+        android:layout_weight="0"/>
 
-    <Button
-        android:id="@+id/trip_save_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_gravity="center"
-        android:text="@string/trip_save"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/trip_save_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/trip_save"/>
+
+    </LinearLayout>
+
 
 
 

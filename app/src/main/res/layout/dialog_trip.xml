@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/dialog_where"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:text="Nelson - Mountain Station"/>
+
+    <TextView
+        android:id="@+id/dialog_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:text="13:30pm 17 Oct 2016"/>
+
+    <TextView
+        android:id="@+id/dialog_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/dark_green"
+        android:text="17:00 17 Oct 2016"/>
+
+    <ImageView
+        android:id="@+id/dialog_map"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/border"
+        android:src="@drawable/mtnstn"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/dialog_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SEND"/>
+
+        <Button
+            android:id="@+id/dialog_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EDIT"
+            android:layout_toEndOf="@id/dialog_send"/>
+    </RelativeLayout>
+
+
+</LinearLayout>
