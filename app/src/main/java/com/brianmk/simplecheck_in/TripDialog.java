@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -36,6 +37,9 @@ public class TripDialog extends DialogFragment {
         text.setText(td.getWhenStart());
         text = (TextView) content.findViewById(R.id.dialog_end);
         text.setText(td.getWhenEnd());
+
+        ImageView image = (ImageView) content.findViewById(R.id.dialog_map);
+        image.setImageResource(td.getDrawable());
 
         tdb.close();
 

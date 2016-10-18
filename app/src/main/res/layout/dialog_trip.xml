@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/black"
-        android:text="Nelson - Mountain Station"/>
+        android:text="@string/trip_title_default"/>
 
     <TextView
         android:id="@+id/dialog_start"
@@ -20,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/black"
-        android:text="13:30pm 17 Oct 2016"/>
+        android:text="@string/trip_when_start_default"/>
 
     <TextView
         android:id="@+id/dialog_end"
@@ -28,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/dark_green"
-        android:text="17:00 17 Oct 2016"/>
+        android:text="@string/trip_when_end_default"/>
 
     <ImageView
         android:id="@+id/dialog_map"
@@ -36,7 +37,7 @@
         android:layout_height="250dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/border"
-        android:src="@drawable/mtnstn"/>
+        android:src="@drawable/stand_by"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -47,13 +48,13 @@
             android:id="@+id/dialog_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SEND"/>
+            android:text="@string/trip_menu_send"/>
 
         <Button
             android:id="@+id/dialog_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EDIT"
+            android:text="@string/trip_menu_edit"
             android:layout_toEndOf="@id/dialog_send"/>
     </RelativeLayout>
 

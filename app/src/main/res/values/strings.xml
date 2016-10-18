@@ -14,9 +14,10 @@
     <string name="context_menu_delete">Delete Trip</string>
 
     <!-- Trip Menu -->
-    <string name="trip_save">Save Trip</string>
-    <string name="trip_menu_edit">Edit Trip</string>
-    <string name="trip_menu_delete">Delete Trip</string>
+    <string name="trip_save">Save</string>
+    <string name="trip_menu_edit">Edit</string>
+    <string name="trip_menu_delete">Delete</string>
+    <string name="trip_menu_send">Send</string>
 
     <!-- Trip attributes -->
     <string name="trip_title_default">Trip Name</string>
