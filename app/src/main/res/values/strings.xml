@@ -20,8 +20,17 @@
     <string name="trip_menu_send">Send</string>
 
     <!-- Trip attributes -->
+    <string name="trip_attr_icon">Icon For Trip Attribute</string>
+    <string name="trip_map">Stolen from Trailforks.com</string>
     <string name="trip_title_default">Trip Name</string>
     <string name="trip_who_default">Who</string>
+    <string-array name="activities_array">
+        <item>Mountain Biking</item>
+        <item>Skiing</item>
+        <item>Hiking</item>
+        <item>Snowshoeing</item>
+        <item>Other</item>
+    </string-array>
     <string name="trip_where_default">Where</string>
     <string name="trip_when_start_default">When (start)</string>
     <string name="trip_when_end_default">When (end)</string>

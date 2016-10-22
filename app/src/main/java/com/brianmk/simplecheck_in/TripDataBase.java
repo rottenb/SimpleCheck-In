@@ -18,7 +18,7 @@ import java.util.List;
  * Simple class containing all data for a single trip
  */
 
-public class TripDataBase extends SQLiteOpenHelper  {
+public class TripDataBase extends SQLiteOpenHelper {
     private static final String LOG_TAG = TripDataBase.class.getSimpleName();
 
     private static final int DATABASE_VERSION = 1;
@@ -121,6 +121,14 @@ public class TripDataBase extends SQLiteOpenHelper  {
         }
 
         TripData tripData = new TripData();
+
+        if (id == 0) {
+            cursor.close();
+            db.close();
+
+            return tripData;
+        }
+
         tripData.setId(Integer.parseInt(cursor.getString(ID_OFFSET)));
         tripData.setTitle(cursor.getString(TITLE_OFFSET));
         tripData.setTitle(cursor.getString(LOCATION_OFFSET));
@@ -131,6 +139,7 @@ public class TripDataBase extends SQLiteOpenHelper  {
         tripData.setWhenPanic(DateFormat.getDateTimeInstance().format(new Date()));
 
         cursor.close();
+        db.close();
 
         return tripData;
     } // getTrip()
@@ -163,6 +172,7 @@ public class TripDataBase extends SQLiteOpenHelper  {
         tripData.setWhenPanic(DateFormat.getDateTimeInstance().format(new Date()));
 
         cursor.close();
+        db.close();
 
         return tripData;
     }
@@ -193,6 +203,8 @@ public class TripDataBase extends SQLiteOpenHelper  {
         }
 
         cursor.close();
+        db.close();
+
         return trips;
 
     } // getAllTrips()
@@ -205,7 +217,6 @@ public class TripDataBase extends SQLiteOpenHelper  {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
-        TripData tripData;
         if (cursor.moveToFirst()) {
             do {
                 titles.add(cursor.getString(1));
@@ -213,6 +224,8 @@ public class TripDataBase extends SQLiteOpenHelper  {
         }
 
         cursor.close();
+        db.close();
+
         return titles;
     } // getAllTripTitles()
 
@@ -234,6 +247,7 @@ public class TripDataBase extends SQLiteOpenHelper  {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.delete(TABLE_TRIPS, KEY_TITLE + " = ?", new String[] {title});
+        db.close();
     } // deleteTrip(String)
 
     public void deleteALLTripDB(Context context) {

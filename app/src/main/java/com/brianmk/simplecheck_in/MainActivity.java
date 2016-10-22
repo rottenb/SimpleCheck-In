@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> tripTitleList;
     private ArrayAdapter<String> mTripListAdapter;
     private ListView tripListView;
+    private int mPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mPosition = position;
                 if (position == 0) {
                     Intent tripIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
                     tripIntent.putExtra("LIST_POSITION", position);
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     args.putString("LIST_TITLE", tripTitleList.get(position));
                     dialog.setArguments(args);
                     dialog.show(getFragmentManager(), "Trip Details");
+                    Log.d(LOG_TAG, "returned to main");
                 }
             }
         });
@@ -164,6 +167,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void editTrip(View view) {
+        Intent tripIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
+        tripIntent.putExtra("LIST_POSITION", mPosition);
+        tripIntent.putExtra("LIST_TITLE", tripTitleList.get(mPosition));
+        startActivity(tripIntent);
+    }
+
+    public void sendTrip(View view) {
+        Log.d(LOG_TAG, "sendTrip()");
     }
 
     private void populateTripDB(TripDataBase tdb) {

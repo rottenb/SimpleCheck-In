@@ -3,8 +3,6 @@ package com.brianmk.simplecheck_in;
 import java.text.DateFormat;
 import java.util.Date;
 
-import static android.R.attr.id;
-
 /**
  * Created by rot on 2016-10-15.
  *
@@ -26,10 +24,9 @@ public class TripData {
 
 
     public TripData() {
-        this.mId = 0;
         this.mTitle = "Where";
-        this.mWho = "Who";
         this.mLocation = "http://www.trailforks.com";
+        this.mWho = "Who";
         this.mDrawable = R.drawable.stand_by;
         this.mWhenStart = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenEnd = DateFormat.getDateTimeInstance().format(new Date());
@@ -37,7 +34,6 @@ public class TripData {
     }
 
     public TripData(String title, String location, int drawable, String who) {
-        this.mId = id;
         this.mTitle = title;
         this.mLocation = location;
         this.mDrawable = drawable;

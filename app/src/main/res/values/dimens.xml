@@ -7,5 +7,10 @@
     <!-- Trip display (editor and viewer) -->
     <dimen name="trip_display_font">20sp</dimen>
     <dimen name="trip_display_vertical_margin">20dp</dimen>
-    <dimen name="trip_display_horizontal_margin">16dp</dimen>
+    <dimen name="trip_display_horizontal_margin">5dp</dimen>
+    <dimen name="trip_display_left_margin">45dp</dimen>
+    <dimen name="trip_icon_margin">5dp</dimen>
+
+    <!-- Sample image of map -->
+    <dimen name="map_thumb_size">250dp</dimen>
 </resources>
