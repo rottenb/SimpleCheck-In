@@ -21,7 +21,14 @@ public class TripData {
     private String mWhenStart;
     private String mWhenEnd;
     private String mWhenPanic;
+    private int mActivity;
 
+    public static final int BIKING_IDX = 0;
+    public static final int SKIING_IDX = 1;
+    public static final int HIKING_IDX = 2;
+    public static final int SNOWSHOEING_IDX = 3;
+    public static final int TRAIL_RUN_IDX = 4;
+    public static final int OTHER_ACT_IDX = 5;
 
     public TripData() {
         this.mTitle = "Where";
@@ -31,9 +38,10 @@ public class TripData {
         this.mWhenStart = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenEnd = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenPanic = DateFormat.getDateTimeInstance().format(new Date());
+        this.mActivity = 0;
     }
 
-    public TripData(String title, String location, int drawable, String who) {
+    public TripData(String title, String location, int drawable, String who, int activity_idx) {
         this.mTitle = title;
         this.mLocation = location;
         this.mDrawable = drawable;
@@ -41,14 +49,16 @@ public class TripData {
         this.mWhenStart = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenEnd = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenPanic = DateFormat.getDateTimeInstance().format(new Date());
+        this.mActivity = activity_idx;
     }
 
     @Override
     public String toString() {
-        return "TripData [id=" + mId + ", title=" + mTitle + ", location=" + mLocation +
-                "drawable=" + mDrawable +
+        return "TripData [id=" + mId + ", title=" + mTitle + ", location=" + mLocation + "/n" +
+                ", drawable=" + mDrawable +
                 ", who=" + mWho +
                 ", start=" + mWhenStart + ", end=" + mWhenEnd + ", panic =" + mWhenPanic +
+                ", activity=" + mActivity +
                 "]";
     }
 
@@ -106,6 +116,13 @@ public class TripData {
     }
     public String getWhenPanic() {
         return mWhenPanic;
+    }
+
+    public void setActivity(int idx) {
+        this.mActivity = idx;
+    }
+    public int getActivity() {
+        return this.mActivity;
     }
 
 }

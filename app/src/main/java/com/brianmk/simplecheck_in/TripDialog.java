@@ -32,6 +32,26 @@ public class TripDialog extends DialogFragment {
         TripDataBase tdb = new TripDataBase(getActivity());
         TripData td = tdb.getTrip(title);
 
+        ImageView activity_icon = (ImageView) content.findViewById(R.id.dialog_activity_icon);
+        switch (td.getActivity()) {
+            case 0:
+                activity_icon.setImageResource(R.drawable.ic_bike_black_24dp);
+                break;
+            case 1:
+                activity_icon.setImageResource(R.drawable.ic_ski_black_24dp);
+                break;
+            case 2:
+                activity_icon.setImageResource(R.drawable.ic_hiking_black_24dp);
+                break;
+            case 3:
+                activity_icon.setImageResource(R.drawable.ic_snowshoe_black_24dp);
+                break;
+            case 4:
+                activity_icon.setImageResource(R.drawable.ic_trail_run_black_24dp);
+            default:
+                activity_icon.setImageResource(R.drawable.ic_walk_black_24dp);
+        }
+
         TextView text = (TextView) content.findViewById(R.id.dialog_where);
         text.setText(td.getTitle());
         text = (TextView) content.findViewById(R.id.dialog_start);

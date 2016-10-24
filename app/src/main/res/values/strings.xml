@@ -29,12 +29,13 @@
         <item>Skiing</item>
         <item>Hiking</item>
         <item>Snowshoeing</item>
+        <item>Trail Running</item>
         <item>Other</item>
     </string-array>
     <string name="trip_where_default">Where</string>
-    <string name="trip_when_start_default">When (start)</string>
-    <string name="trip_when_end_default">When (end)</string>
-    <string name="trip_when_panic_default">When (panic)</string>
+    <string name="trip_when_start_default">Sat Oct 22  11:28</string>
+    <string name="trip_when_end_default">Sat Oct 22  13:30</string>
+    <string name="trip_when_panic_default">Sat Oct 22  15:00</string>
 
     <!-- Confirm Yes/No -->
     <string name="confirm_yes">Yes</string>

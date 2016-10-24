@@ -22,7 +22,6 @@
             android:contentDescription="@string/trip_attr_icon"/>
         <EditText
             android:id="@+id/trip_title"
-            style="@android:style/Widget.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
@@ -44,7 +43,6 @@
         <EditText
             android:id="@+id/trip_who"
             android:layout_below="@+id/trip_title"
-            style="@android:style/Widget.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
@@ -66,7 +64,6 @@
         <EditText
             android:id="@+id/trip_location"
             android:layout_below="@+id/trip_who"
-            style="@android:style/Widget.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
@@ -77,32 +74,32 @@
             android:textColorHint="@color/light_grey"
             android:inputType="textUri"/>
         <ImageView
+            style="@android:style/Widget.Material.Light.Button.Inset"
             android:id="@+id/trip_map_view"
             android:layout_below="@+id/trip_location"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/map_thumb_size"
-            android:layout_gravity="center_horizontal"
             android:contentDescription="@string/trip_map"
-            android:src="@drawable/stand_by"/>
+            android:src="@drawable/stand_by2"/>
 
         <ImageView
+            android:id="@+id/trip_activity_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="@dimen/trip_icon_margin"
-            android:layout_alignBottom="@+id/trip_what"
+            android:layout_alignBottom="@+id/trip_activity"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_directions_bike_black_24dp"
+            android:src="@drawable/ic_bike_black_24dp"
             android:contentDescription="@string/trip_attr_icon"/>
         <Spinner
-            android:id="@+id/trip_what"
+            style="@android:style/Widget.Material.Light.Button.Inset"
+            android:id="@+id/trip_activity"
             android:layout_below="@+id/trip_map_view"
-            style="@android:style/Widget.Spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/trip_display_vertical_margin"
+            android:layout_marginTop="30dp"
             android:layout_marginStart="@dimen/trip_display_left_margin"
             android:layout_marginEnd="@dimen/trip_display_horizontal_margin"/>
-
 
         <ImageView
             android:layout_width="30dp"
@@ -113,9 +110,9 @@
             android:src="@drawable/ic_alarm_black_24dp"
             android:contentDescription="@string/trip_attr_icon"/>
         <Button
+            style="@android:style/Widget.Material.Light.Button.Inset"
             android:id="@+id/trip_when_start"
-            android:layout_below="@+id/trip_what"
-            style="@android:style/Widget.Button"
+            android:layout_below="@+id/trip_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/trip_display_left_margin"
@@ -124,7 +121,6 @@
             android:textColorHint="@color/dark_grey"
             android:hint="@string/trip_when_start_default"
             android:onClick="showTimePicker"/>
-
 
         <ImageView
             android:layout_width="30dp"
@@ -135,9 +131,9 @@
             android:src="@drawable/ic_alarm_off_black_24dp"
             android:contentDescription="@string/trip_attr_icon"/>
         <Button
+            style="@android:style/Widget.Material.Light.Button.Inset"
             android:id="@+id/trip_when_end"
             android:layout_below="@+id/trip_when_start"
-            style="@android:style/Widget.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/trip_display_left_margin"
@@ -156,9 +152,9 @@
             android:src="@drawable/ic_report_problem_black_24dp"
             android:contentDescription="@string/trip_attr_icon"/>
         <Button
+            style="@android:style/Widget.Material.Light.Button.Inset"
             android:id="@+id/trip_when_panic"
             android:layout_below="@+id/trip_when_end"
-            style="@android:style/Widget.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/trip_display_left_margin"
@@ -168,14 +164,28 @@
             android:hint="@string/trip_when_panic_default"
             android:onClick="showTimePicker"/>
 
-        <Button
-            android:id="@+id/trip_save_button"
-            android:layout_below="@+id/trip_when_panic"
-            style="@android:style/Widget.Button"
-            android:layout_marginTop="@dimen/trip_display_vertical_margin"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/trip_when_panic"
+            android:orientation="horizontal">
+
+        <Button
+            style="@android:style/Widget.Material.Light.Button.Inset"
+            android:id="@+id/trip_save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="@string/trip_save"/>
+
+        <Button
+            style="@android:style/Widget.Material.Light.Button.Inset"
+            android:id="@+id/trip_send_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="@string/trip_menu_send"/>
+        </LinearLayout>
     </RelativeLayout>
 
 </ScrollView>

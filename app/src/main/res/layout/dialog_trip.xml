@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <ImageView
+        android:id="@+id/dialog_activity_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_bike_black_24dp"/>
+
     <TextView
         android:id="@+id/dialog_where"
         android:layout_width="wrap_content"
