@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -35,16 +36,15 @@ public class MainActivity extends AppCompatActivity {
         TripDataBase tripDB = new TripDataBase(this);
 
         tripTitleList = tripDB.getAllTripTitles();
-        tripTitleList.add(0, "-- Tap To Add New Trip --");
 
         mTripListAdapter = new ArrayAdapter<> (this, R.layout.trip_list_item,
                                                 R.id.trip_list_item_textview,
                                                 tripTitleList );
+
         tripListView = (ListView) findViewById(R.id.trip_list);
         tripListView.setAdapter(mTripListAdapter);
 
         registerForContextMenu(tripListView);
-
 
         // Tapping on a list item brings up the trip details overview
         tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -169,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     public void editTrip(View view) {
         Intent tripIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
         tripIntent.putExtra("LIST_POSITION", mPosition);
@@ -178,7 +177,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendTrip(View view) {
-        Log.d(LOG_TAG, "sendTrip()");
+        TripDataBase tdb = new TripDataBase(this);
+        TripData tripData = tdb.getTrip(tripTitleList.get(mPosition));
+
+        String subject = tripData.getTitle() + " " + tripData.getWhenStart();
+        String body = tripData.getTitle() + "\n\n" +
+                        tripData.getLocation() + "\n\n" +
+                        tripData.getWhenStart() + "\n" +
+                        tripData.getWhenEnd() + "\n" +
+                        tripData.getWhenPanic();
+
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.setType("message/rfc822");
+        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"brianmk@zombieworld.com"});
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, body);
+
+        try {
+            startActivity(Intent.createChooser(sendIntent, "Email..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(MainActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void populateTripDB(TripDataBase tdb) {

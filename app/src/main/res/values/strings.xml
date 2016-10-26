@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Simple Check-In</string>
 
+    <!-- Trip List -->
+    <string name="trip_list_add">  Tap To Add New Trip  </string>
+
     <!-- Main Menu -->
     <string name="main_menu_add">Add Trip</string>
     <string name="main_menu_edit">Edit Trip List</string>

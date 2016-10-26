@@ -3,7 +3,6 @@ package com.brianmk.simplecheck_in;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -37,9 +36,7 @@ public class TripDetailActivity extends AppCompatActivity {
 
         final TripDataBase tripDataBase = new TripDataBase(this);
 
-        if (position != 0) {
-            setTripView(tripDataBase.getTrip(title));
-        }
+        setTripView(tripDataBase.getTrip(title));
 
         Button  saveButton = (Button) findViewById(R.id.trip_save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +60,7 @@ public class TripDetailActivity extends AppCompatActivity {
     public void showTimePicker(View view) {
         DialogFragment timePicker = new TimePickerFragment();
         timePicker.show(getFragmentManager(), "timePicker");
+
     } // showTimePicker()
 
     private void setTripView(TripData tripData) {
@@ -74,8 +72,10 @@ public class TripDetailActivity extends AppCompatActivity {
         ImageView mapView = (ImageView) findViewById(R.id.trip_map_view);
         mapView.setImageResource(tripData.getDrawable());
 
+        Spinner activity_spinner = (Spinner) findViewById(R.id.trip_activity);
+        activity_spinner.setSelection(tripData.getActivity());
+
         ImageView activity_icon = (ImageView) findViewById(R.id.trip_activity_icon);
-        Log.d(LOG_TAG, "ACT IDX: " + tripData.getActivity());
         switch (tripData.getActivity()) {
             case 0:
                 activity_icon.setImageResource(R.drawable.ic_bike_black_24dp);
