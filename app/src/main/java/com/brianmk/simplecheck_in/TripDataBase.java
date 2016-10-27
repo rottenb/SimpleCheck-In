@@ -166,6 +166,8 @@ public class TripDataBase extends SQLiteOpenHelper {
             cursor.moveToFirst();
         }
 
+        Log.d(LOG_TAG, title);
+
         TripData tripData = new TripData();
         tripData.setId(Integer.parseInt(cursor.getString(ID_OFFSET)));
         tripData.setTitle(cursor.getString(TITLE_OFFSET));

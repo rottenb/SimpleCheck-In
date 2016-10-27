@@ -2,7 +2,7 @@
     <string name="app_name">Simple Check-In</string>
 
     <!-- Trip List -->
-    <string name="trip_list_add">  Tap To Add New Trip  </string>
+    <string name="trip_list_add">New Trip</string>
 
     <!-- Main Menu -->
     <string name="main_menu_add">Add Trip</string>
@@ -11,6 +11,7 @@
     <string name="main_menu_app_settings">App Settings</string>
     <string name="main_menu_delete">Delete Trip Database</string>
     <string name="main_menu_create">Create Trip Database</string>
+    <string name="main_menu_dump">Dump Trip Database to Log.d</string>
 
     <!-- Context Menu (Hold Item) -->
     <string name="context_menu_send">Send Trip</string>
@@ -21,6 +22,8 @@
     <string name="trip_menu_edit">Edit</string>
     <string name="trip_menu_delete">Delete</string>
     <string name="trip_menu_send">Send</string>
+    <string name="trip_menu_detail">View</string>
+    <string name="trip_detail_cancel">Cancel</string>
 
     <!-- Trip attributes -->
     <string name="trip_attr_icon">Icon For Trip Attribute</string>
@@ -39,6 +42,7 @@
     <string name="trip_when_start_default">Sat Oct 22  11:28</string>
     <string name="trip_when_end_default">Sat Oct 22  13:30</string>
     <string name="trip_when_panic_default">Sat Oct 22  15:00</string>
+    <string name="trip_notes">  Notes:</string>
 
     <!-- Confirm Yes/No -->
     <string name="confirm_yes">Yes</string>

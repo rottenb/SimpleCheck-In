@@ -51,26 +51,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mPosition = position;
-                if (position == 0) {
-                    Intent tripIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
-                    tripIntent.putExtra("LIST_POSITION", position);
-                    tripIntent.putExtra("LIST_TITLE", tripTitleList.get(position));
-                    startActivity(tripIntent);
-                } else {
-                    DialogFragment dialog = new TripDialog();
-                    Bundle args = new Bundle();
-                    args.putString("LIST_TITLE", tripTitleList.get(position));
-                    dialog.setArguments(args);
-                    dialog.show(getFragmentManager(), "Trip Details");
-                    Log.d(LOG_TAG, "returned to main");
-                }
+
+                DialogFragment dialog = new TripDialog();
+                Bundle args = new Bundle();
+                args.putString("LIST_TITLE", tripTitleList.get(mPosition));
+                dialog.setArguments(args);
+                dialog.show(getFragmentManager(), "Trip Details");
             }
         });
+
+
     } // onCreate()
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
+
+
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 
@@ -161,17 +158,29 @@ public class MainActivity extends AppCompatActivity {
                 tdb.close();
 
                 break;
+            case R.id.main_menu_dump:
+                List<TripData> td = tdb.getAllTrips();
+                for (int i = 0; i < tripTitleList.size(); i++) {
+                    Log.d(LOG_TAG, td.get(i).toString());
+                }
+                tdb.close();
+                break;
             default:
                 Log.d(LOG_TAG, "Oops, fell through");
+                tdb.close();
                 break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    public void newTrip(View view) {
+        Intent tripIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
+        startActivity(tripIntent);
+    }
+
     public void editTrip(View view) {
         Intent tripIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
-        tripIntent.putExtra("LIST_POSITION", mPosition);
         tripIntent.putExtra("LIST_TITLE", tripTitleList.get(mPosition));
         startActivity(tripIntent);
     }
@@ -181,11 +190,11 @@ public class MainActivity extends AppCompatActivity {
         TripData tripData = tdb.getTrip(tripTitleList.get(mPosition));
 
         String subject = tripData.getTitle() + " " + tripData.getWhenStart();
-        String body = tripData.getTitle() + "\n\n" +
-                        tripData.getLocation() + "\n\n" +
-                        tripData.getWhenStart() + "\n" +
-                        tripData.getWhenEnd() + "\n" +
-                        tripData.getWhenPanic();
+        String body =   "WHERE: " + tripData.getLocation() + "\n\n" +
+                        "WHO: " + tripData.getWho() + "\n\n" +
+                        "WHEN (start): " + tripData.getWhenStart() + "\n" +
+                        "WHEN (end): " + tripData.getWhenEnd() + "\n" +
+                        "WHEN (panic): " + tripData.getWhenPanic();
 
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
         sendIntent.setType("message/rfc822");

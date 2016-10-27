@@ -46,26 +46,37 @@
         android:background="@drawable/border"
         android:src="@drawable/stand_by"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
 
         <Button
+            style="@android:style/Widget.Material.Light.Button.Inset"
             android:id="@+id/dialog_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="@string/trip_menu_send"
             android:onClick="sendTrip"/>
 
         <Button
+            style="@android:style/Widget.Material.Light.Button.Inset"
+            android:id="@+id/dialog_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="@string/trip_menu_detail"/>
+
+        <Button
+            style="@android:style/Widget.Material.Light.Button.Inset"
             android:id="@+id/dialog_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/dialog_send"
+            android:textColor="@color/black"
             android:text="@string/trip_menu_edit"
             android:onClick="editTrip"/>
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

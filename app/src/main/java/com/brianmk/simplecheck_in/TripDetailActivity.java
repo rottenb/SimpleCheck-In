@@ -19,11 +19,15 @@ import android.widget.Spinner;
 public class TripDetailActivity extends AppCompatActivity {
     private static final String LOG_TAG = TripDetailActivity.class.getSimpleName();
 
+    TripData tripData;
+    TripDataBase tripDataBase;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.trip_edit);
+
         Spinner activity_spinner = (Spinner) findViewById(R.id.trip_activity);
         ArrayAdapter<CharSequence> activityAdapter = ArrayAdapter.createFromResource(this,
                 R.array.activities_array, R.layout.spinner_item);
@@ -31,26 +35,27 @@ public class TripDetailActivity extends AppCompatActivity {
         activity_spinner.setAdapter(activityAdapter);
         activity_spinner.setSelection(0);
 
-        final int position = getIntent().getIntExtra("LIST_POSITION", 0);
-        final String title = getIntent().getStringExtra("LIST_TITLE");
+        tripDataBase = new TripDataBase(this);
 
-        final TripDataBase tripDataBase = new TripDataBase(this);
+        if (getIntent().getStringExtra("LIST_TITLE") == null) {
+            tripData = new TripData();
+        } else {
+            tripData = tripDataBase.getTrip(getIntent().getStringExtra("LIST_TITLE"));
+        }
 
-        setTripView(tripDataBase.getTrip(title));
+        setTripView(tripData);
 
         Button  saveButton = (Button) findViewById(R.id.trip_save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                TripData tripData = tripDataBase.getTrip(position);
-                setTripData(tripData);
-
-                if (position == 0) {
-                    tripDataBase.addTrip(tripData);
-                } else {
-                    tripData.setId(position);
-                    tripDataBase.updateTrip(tripData);
+                tripDataBase.updateTrip(tripData);
                 }
+            });
+
+        Button sendButton = (Button) findViewById(R.id.trip_send_button);
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
             }
         });
 

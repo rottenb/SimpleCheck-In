@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_main"
     android:layout_width="match_parent"
@@ -20,13 +21,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/black"
-        android:text="@string/trip_list_add"/>
+        android:text="@string/trip_list_add"
+        android:onClick="newTrip"/>
 
     <ListView
+        style="@android:style/Widget.Material.Light.ListView"
         android:id="@+id/trip_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@color/dark_grey"
         android:dividerHeight="1dp"/>
+
 
 </LinearLayout>
