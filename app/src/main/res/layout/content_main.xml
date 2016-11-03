@@ -14,19 +14,17 @@
         style="@android:style/Widget.Material.Light.ListView"
         android:id="@+id/trip_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@color/dark_grey"
-        android:dividerHeight="1dp"/>
+        android:layout_height="match_parent"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/trip_list_add"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:layout_margin="@dimen/activity_vertical_margin"
+        android:layout_margin="10dp"
         app:fabSize="normal"
         app:layout_anchor="@id/trip_list"
         app:layout_anchorGravity="bottom|end"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorAccent"
         android:scaleType="center"
         android:src="@drawable/ic_note_add_black_24dp"
         android:onClick="newTrip"

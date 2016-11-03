@@ -83,7 +83,9 @@
             android:layout_below="@+id/trip_location"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/map_thumb_size"
+            android:layout_centerHorizontal="true"
             android:contentDescription="@string/trip_map"
+            android:adjustViewBounds="true"
             android:src="@drawable/stand_by2"/>
 
         <!-- Activity -->
@@ -115,13 +117,14 @@
             android:src="@drawable/ic_alarm_black_24dp"
             android:contentDescription="@string/trip_attr_icon"/>
         <Button
+            style="@android:style/Widget.Button"
             android:id="@+id/trip_when_start"
             android:layout_below="@+id/trip_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/trip_display_left_margin"
             android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
-            android:textColor="@color/light_grey"
+            android:textColor="@color/black"
             android:textColorHint="@color/dark_grey"
             android:hint="@string/trip_when_start_default"
             android:onClick="showTimePicker"/>
@@ -136,6 +139,7 @@
             android:src="@drawable/ic_alarm_off_black_24dp"
             android:contentDescription="@string/trip_attr_icon"/>
         <Button
+            style="@android:style/Widget.Button"
             android:id="@+id/trip_when_end"
             android:layout_below="@+id/trip_when_start"
             android:layout_width="match_parent"
@@ -157,6 +161,7 @@
             android:src="@drawable/ic_report_problem_black_24dp"
             android:contentDescription="@string/trip_attr_icon"/>
         <Button
+            style="@android:style/Widget.Button"
             android:id="@+id/trip_when_panic"
             android:layout_below="@+id/trip_when_end"
             android:layout_width="match_parent"
