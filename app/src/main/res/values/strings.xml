@@ -25,6 +25,10 @@
     <string name="trip_menu_detail">View</string>
     <string name="trip_detail_cancel">Cancel</string>
 
+
+    <!-- Trip Editor -->
+    <string name="trip_display_title">Trip Overview</string>
+
     <!-- Trip attributes -->
     <string name="trip_attr_icon">Icon For Trip Attribute</string>
     <string name="trip_map">Stolen from Trailforks.com</string>
@@ -48,7 +52,9 @@
     <string name="confirm_yes">Yes</string>
     <string name="confirm_no">No</string>
 
-    <!-- Trip Editor -->
-    <string name="trip_display_title">Trip Overview</string>
+    <!-- User Settings -->
+    <string name="user_set_name">Name</string>
+    <string name="user_set_recipient">Default Recipient</string>
+
 
 </resources>

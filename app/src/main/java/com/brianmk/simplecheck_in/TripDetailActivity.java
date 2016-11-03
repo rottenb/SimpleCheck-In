@@ -1,6 +1,5 @@
 package com.brianmk.simplecheck_in;
 
-import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -63,7 +62,11 @@ public class TripDetailActivity extends AppCompatActivity {
     } // onCreate()
 
     public void showTimePicker(View view) {
-        DialogFragment timePicker = new TimePickerFragment();
+        TimePickerFragment timePicker = new TimePickerFragment();
+        Bundle args = new Bundle();
+        args.putInt("WHEN_ID", view.getId());
+
+        timePicker.setArguments(args);
         timePicker.show(getFragmentManager(), "timePicker");
 
     } // showTimePicker()

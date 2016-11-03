@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -150,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.main_menu_create_db:
                 Log.d(LOG_TAG, "CREATE DATABASE");
 
-                populateTripDB(tdb);
+                Utility.populateTripDB(tdb);
 
                 mTripListAdapter.notifyDataSetChanged();
                 tripListView.setAdapter(mTripListAdapter);
@@ -189,26 +188,11 @@ public class MainActivity extends AppCompatActivity {
         TripDataBase tdb = new TripDataBase(this);
         TripData tripData = tdb.getTrip(tripTitleList.get(mPosition));
 
-        String subject = tripData.getTitle() + " " + tripData.getWhenStart();
-        String body =   "WHERE: " + tripData.getLocation() + "\n\n" +
-                        "WHO: " + tripData.getWho() + "\n\n" +
-                        "WHEN (start): " + tripData.getWhenStart() + "\n" +
-                        "WHEN (end): " + tripData.getWhenEnd() + "\n" +
-                        "WHEN (panic): " + tripData.getWhenPanic();
-
-        Intent sendIntent = new Intent(Intent.ACTION_SEND);
-        sendIntent.setType("message/rfc822");
-        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"brianmk@zombieworld.com"});
-        sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, body);
-
-        try {
-            startActivity(Intent.createChooser(sendIntent, "Email..."));
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(MainActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-        }
+        Utility.sendMessage(this, tripData);
+        tdb.close();
     }
 
+/*
     private void populateTripDB(TripDataBase tdb) {
         tdb.addTrip(new TripData("Nelson - Mountain Station",
                                 "http://www.trailforks.com/region/mountain-station/",
@@ -264,4 +248,5 @@ public class MainActivity extends AppCompatActivity {
                                 "Brian K, Ryan B, Ashley S",
                                 TripData.BIKING_IDX));
     }
+ */
 }
