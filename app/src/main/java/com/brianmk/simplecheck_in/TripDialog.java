@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -54,20 +53,13 @@ public class TripDialog extends DialogFragment {
 
         TextView text = (TextView) content.findViewById(R.id.dialog_where);
         text.setText(td.getTitle());
-        text = (TextView) content.findViewById(R.id.dialog_start);
-        text.setText(td.getWhenStart());
-        text = (TextView) content.findViewById(R.id.dialog_end);
-        text.setText(td.getWhenEnd());
 
-        ImageView image = (ImageView) content.findViewById(R.id.dialog_map);
-        image.setImageResource(td.getDrawable());
 
         tdb.close();
 
-        Log.d(LOG_TAG, "onCreateDialog end");
-
         return builder.create();
     } // onCreateDialog()
+
 
 
 } // TripDialog

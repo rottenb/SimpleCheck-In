@@ -3,6 +3,11 @@
 
     <!-- Trip List -->
     <string name="trip_list_add">New Trip</string>
+    <string name="trip_list_item_default">Trip Name Goes Here</string>
+    <string name="trip_list_starred_description">Starred Trip</string>
+    <string name="trip_list_activity_description">Activity Type</string>
+    <string name="trip_list_time_description">Activity Time</string>
+    <string name="trip_list_alarm_description">Activity Alarm</string>
 
     <!-- Main Menu -->
     <string name="main_menu_add">Add Trip</string>
@@ -25,6 +30,9 @@
     <string name="trip_menu_detail">View</string>
     <string name="trip_detail_cancel">Cancel</string>
 
+    <!-- Trip Dialog -->
+    <string name="trip_dialog_activity">Activity</string>
+    <string name="trip_dialog_map">Map</string>
 
     <!-- Trip Editor -->
     <string name="trip_display_title">Trip Overview</string>
@@ -46,7 +54,7 @@
     <string name="trip_when_start_default">Sat Oct 22  11:28</string>
     <string name="trip_when_end_default">Sat Oct 22  13:30</string>
     <string name="trip_when_panic_default">Sat Oct 22  15:00</string>
-    <string name="trip_notes">  Notes:</string>
+    <string name="trip_notes">Notes:</string>
 
     <!-- Confirm Yes/No -->
     <string name="confirm_yes">Yes</string>

@@ -1,231 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
-
-    <RelativeLayout
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:descendantFocusability="beforeDescendants"
-        android:focusableInTouchMode="true">
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:background="@color/colorPrimary">
 
-        <!-- Title -->
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="@dimen/trip_icon_margin"
-            android:layout_alignBottom="@+id/trip_title"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_add_location_black_24dp"
-            android:contentDescription="@string/trip_attr_icon"/>
-        <EditText
-            android:id="@+id/trip_title"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
-            android:layout_marginStart="@dimen/trip_display_left_margin"
-            android:cursorVisible="true"
-            android:textColor="@color/black"
-            android:hint="@string/trip_title_default"
-            android:textColorHint="@color/light_grey"
-            android:inputType="textCapWords"/>
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true">
 
-        <!-- Who -->
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="@dimen/trip_icon_margin"
-            android:layout_alignBottom="@+id/trip_who"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_group_black_24dp"
-            android:contentDescription="@string/trip_attr_icon"/>
-        <EditText
-            android:id="@+id/trip_who"
-            android:layout_below="@+id/trip_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
-            android:layout_marginStart="@dimen/trip_display_left_margin"
-            android:cursorVisible="true"
-            android:textColor="@color/black"
-            android:hint="@string/trip_who_default"
-            android:textColorHint="@color/light_grey"
-            android:inputType="textCapWords"/>
-
-        <!-- Location -->
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="@dimen/trip_icon_margin"
-            android:layout_alignBottom="@+id/trip_location"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_terrain_black_24dp"
-            android:contentDescription="@string/trip_attr_icon"/>
-        <EditText
-            android:id="@+id/trip_location"
-            android:layout_below="@+id/trip_who"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
-            android:layout_marginStart="@dimen/trip_display_left_margin"
-            android:cursorVisible="true"
-            android:textColor="@color/black"
-            android:hint="@string/trip_where_default"
-            android:textColorHint="@color/light_grey"
-            android:inputType="textUri"/>
-        <!-- Map Image -->
-        <ImageView
-            style="@android:style/Widget.Material.Light.Button.Inset"
-            android:id="@+id/trip_map_view"
-            android:layout_below="@+id/trip_location"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/map_thumb_size"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/trip_map"
-            android:adjustViewBounds="true"
-            android:src="@drawable/stand_by2"/>
-
-        <!-- Activity -->
-        <ImageView
-            android:id="@+id/trip_activity_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="@dimen/trip_icon_margin"
-            android:layout_alignBottom="@+id/trip_activity"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_bike_black_24dp"
-            android:contentDescription="@string/trip_attr_icon"/>
-        <Spinner
-            android:id="@+id/trip_activity"
-            android:layout_below="@+id/trip_map_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="@dimen/trip_display_left_margin"
-            android:layout_marginEnd="@dimen/trip_display_horizontal_margin"/>
-
-        <!-- When (start) -->
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="@dimen/trip_icon_margin"
-            android:layout_alignBottom="@+id/trip_when_start"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_alarm_black_24dp"
-            android:contentDescription="@string/trip_attr_icon"/>
-        <Button
-            style="@android:style/Widget.Button"
-            android:id="@+id/trip_when_start"
-            android:layout_below="@+id/trip_activity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/trip_display_left_margin"
-            android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
-            android:textColor="@color/black"
-            android:textColorHint="@color/dark_grey"
-            android:hint="@string/trip_when_start_default"
-            android:onClick="showTimePicker"/>
-
-        <!-- When (end) -->
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="@dimen/trip_icon_margin"
-            android:layout_alignBottom="@+id/trip_when_end"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_alarm_off_black_24dp"
-            android:contentDescription="@string/trip_attr_icon"/>
-        <Button
-            style="@android:style/Widget.Button"
-            android:id="@+id/trip_when_end"
-            android:layout_below="@+id/trip_when_start"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/trip_display_left_margin"
-            android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
-            android:textColor="@color/black"
-            android:textColorHint="@color/dark_grey"
-            android:hint="@string/trip_when_end_default"
-            android:onClick="showTimePicker"/>
-
-        <!-- When (panic) -->
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="@dimen/trip_icon_margin"
-            android:layout_alignBottom="@+id/trip_when_panic"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_report_problem_black_24dp"
-            android:contentDescription="@string/trip_attr_icon"/>
-        <Button
-            style="@android:style/Widget.Button"
-            android:id="@+id/trip_when_panic"
-            android:layout_below="@+id/trip_when_end"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/trip_display_left_margin"
-            android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
-            android:textColor="@color/red"
-            android:textColorHint="@color/dark_red"
-            android:hint="@string/trip_when_panic_default"
-            android:onClick="showTimePicker"/>
-
-        <!-- Notes -->
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="@dimen/trip_icon_margin"
-            android:layout_alignTop="@+id/trip_notes"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_note_add_black_24dp"
-            android:contentDescription="@string/trip_attr_icon"/>
-        <EditText
-            android:id="@+id/trip_notes"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@+id/trip_when_panic"
-            android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
-            android:layout_marginStart="@dimen/trip_display_left_margin"
-            android:cursorVisible="true"
-            android:gravity="top|start"
-            android:background="@drawable/border"
-            android:textColor="@color/black"
-            android:hint="@string/trip_notes"
-            android:textColorHint="@color/light_grey"
-            android:inputType="text"/>
-
-        <!-- Save, Send, Cancel, etc buttons -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/trip_notes"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
-
-            <Button
-                android:id="@+id/trip_save_button"
-                android:layout_width="wrap_content"
+            <!-- Title -->
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/trip_icon_margin"
+                android:layout_alignBottom="@+id/trip_title"
+                android:layout_marginBottom="10dp"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/ic_add_location_black_24dp"
+                android:contentDescription="@string/trip_attr_icon"/>
+            <EditText
+                android:id="@+id/trip_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/trip_save"/>
+                android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
+                android:layout_marginStart="@dimen/trip_display_left_margin"
+                android:cursorVisible="true"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@color/light_grey"
+                android:hint="@string/trip_title_default"
+                android:textColorHint="@color/light_grey"
+                android:inputType="textCapWords"/>
 
-            <Button
-                android:id="@+id/trip_send_button"
-                android:layout_width="wrap_content"
+            <!-- Who -->
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/trip_icon_margin"
+                android:layout_alignBottom="@+id/trip_who"
+                android:layout_marginBottom="10dp"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/ic_group_black_24dp"
+                android:contentDescription="@string/trip_attr_icon"/>
+            <EditText
+                android:id="@+id/trip_who"
+                android:layout_below="@+id/trip_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/trip_menu_send"/>
+                android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
+                android:layout_marginStart="@dimen/trip_display_left_margin"
+                android:cursorVisible="true"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@color/light_grey"
+                android:hint="@string/trip_who_default"
+                android:textColorHint="@color/light_grey"
+                android:inputType="textCapWords"/>
 
-            <Button
-                android:id="@+id/trip_cancel_button"
-                android:layout_width="wrap_content"
+            <!-- Location -->
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/trip_icon_margin"
+                android:layout_alignBottom="@+id/trip_location"
+                android:layout_marginBottom="10dp"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/ic_terrain_black_24dp"
+                android:contentDescription="@string/trip_attr_icon"/>
+            <EditText
+                android:id="@+id/trip_location"
+                android:layout_below="@+id/trip_who"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/trip_detail_cancel"/>
-        </LinearLayout>
-    </RelativeLayout>
+                android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
+                android:layout_marginStart="@dimen/trip_display_left_margin"
+                android:cursorVisible="true"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@color/light_grey"
+                android:hint="@string/trip_where_default"
+                android:textColorHint="@color/light_grey"
+                android:inputType="textUri"/>
+            <!-- Map Image -->
+            <ImageView
+                android:id="@+id/trip_map_view"
+                android:layout_below="@+id/trip_location"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/map_thumb_size"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/trip_map"
+                android:adjustViewBounds="true"
+                android:src="@drawable/stand_by2"/>
 
-</ScrollView>
+            <!-- Activity -->
+            <ImageView
+                android:id="@+id/trip_activity_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/trip_icon_margin"
+                android:layout_alignBottom="@+id/trip_activity"
+                android:layout_marginBottom="10dp"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/ic_bike_black_24dp"
+                android:contentDescription="@string/trip_attr_icon"/>
+            <Spinner
+                android:id="@+id/trip_activity"
+                android:layout_below="@+id/trip_map_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spinner_border"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="@dimen/trip_display_left_margin"
+                android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
+                />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignBottom="@+id/trip_activity"
+                android:layout_alignEnd="@+id/trip_activity"
+                android:src="@drawable/drop"
+                />
+
+            <!-- When (start) -->
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/trip_icon_margin"
+                android:layout_alignBottom="@+id/trip_when_start"
+                android:layout_marginBottom="10dp"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/ic_alarm_black_24dp"
+                android:contentDescription="@string/trip_attr_icon"/>
+            <Button
+                android:id="@+id/trip_when_start"
+                android:layout_below="@+id/trip_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/trip_display_left_margin"
+                android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/spinner_border"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@color/light_grey"
+                android:textColorHint="@color/light_grey"
+                android:hint="@string/trip_when_start_default"
+                android:onClick="showTimePicker"/>
+
+            <!-- When (end) -->
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/trip_icon_margin"
+                android:layout_alignBottom="@+id/trip_when_end"
+                android:layout_marginBottom="10dp"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/ic_alarm_off_black_24dp"
+                android:contentDescription="@string/trip_attr_icon"/>
+            <Button
+                android:id="@+id/trip_when_end"
+                android:layout_below="@+id/trip_when_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/trip_display_left_margin"
+                android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/spinner_border"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@color/light_grey"
+                android:textColorHint="@color/light_grey"
+                android:hint="@string/trip_when_end_default"
+                android:onClick="showTimePicker"/>
+
+            <!-- When (panic) -->
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/trip_icon_margin"
+                android:layout_alignBottom="@+id/trip_when_panic"
+                android:layout_marginBottom="10dp"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/ic_report_problem_black_24dp"
+                android:contentDescription="@string/trip_attr_icon"/>
+            <Button
+                android:id="@+id/trip_when_panic"
+                android:layout_below="@+id/trip_when_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/trip_display_left_margin"
+                android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/spinner_border"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@color/light_grey"
+                android:textColorHint="@color/light_grey"
+                android:hint="@string/trip_when_panic_default"
+                android:onClick="showTimePicker"/>
+
+            <!-- Notes -->
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/trip_icon_margin"
+                android:layout_alignTop="@+id/trip_notes"
+                android:layout_marginBottom="10dp"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/ic_note_add_black_24dp"
+                android:contentDescription="@string/trip_attr_icon"/>
+            <EditText
+                android:id="@+id/trip_notes"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@+id/trip_when_panic"
+                android:layout_marginEnd="@dimen/trip_display_horizontal_margin"
+                android:layout_marginStart="@dimen/trip_display_left_margin"
+                android:layout_marginTop="5dp"
+                android:cursorVisible="true"
+                android:gravity="top|start"
+                android:background="@drawable/spinner_border"
+                android:textColor="@color/black"
+                android:hint="@string/trip_notes"
+                android:textColorHint="@color/light_grey"
+                android:inputType="text"/>
+
+            <!-- Save, Send, Cancel, etc buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/trip_notes"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/trip_save_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/trip_save"/>
+
+                <Button
+                    android:id="@+id/trip_send_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/trip_menu_send"/>
+
+                <Button
+                    android:id="@+id/trip_cancel_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/trip_detail_cancel"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </ScrollView>

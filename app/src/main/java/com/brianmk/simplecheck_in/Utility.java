@@ -16,8 +16,8 @@ public class Utility {
         tdb.addTrip(new TripData("Nelson - Mountain Station",
                 "http://www.trailforks.com/region/mountain-station/",
                 R.drawable.nelson_mountain_station,
-                "Brian K",
-                TripData.BIKING_IDX));
+                "Brian K, Christine W",
+                TripData.HIKING_IDX));
 
         tdb.addTrip(new TripData("Nelson - Giveout/Gold Creek",
                 "http://www.trailforks.com/region/giveout-and-gold-creek/",
@@ -83,7 +83,7 @@ public class Utility {
                 "http://www.trailforks.com/region/galbraith/",
                 R.drawable.galbraith,
                 "Brian K, Kay C, Dylan M, Chris D",
-                TripData.SKIING_IDX));
+                TripData.BIKING_IDX));
 
 
     }

@@ -3,28 +3,47 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@color/white">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="15dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:background="@drawable/circle"
-        android:src="@drawable/ic_star_border_black_24dp"
-        />
-
-    <TextView
-        android:id="@+id/trip_list_item_textview"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="35dp"
-        android:gravity="center_vertical"
-        android:textColor="@color/black"
-        android:text="Trip Name Goes Here"
-        android:minHeight="?android:attr/listPreferredItemHeight"/>
+        android:layout_marginTop="10dp"
+        android:id="@+id/trip_icons">
+
+        <ImageView
+            android:id="@+id/trip_list_activity_type"
+            android:contentDescription="@string/trip_list_activity_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/ic_bike_black_24dp"
+            android:backgroundTint="@color/dark_grey" />
+
+        <TextView
+            android:id="@+id/trip_list_item_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/olive"
+            android:text="@string/trip_list_item_default"
+            android:textSize="@dimen/trip_display_font"
+            android:minHeight="?android:attr/listPreferredItemHeight"/>
+
+        <ImageView
+            android:id="@+id/trip_list_alarm"
+            android:contentDescription="@string/trip_list_alarm_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="5dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/ic_alarm_off_black_24dp"
+            android:backgroundTint="@color/light_grey"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

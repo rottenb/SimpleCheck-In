@@ -12,7 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.List;
@@ -20,9 +19,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private final static String LOG_TAG = MainActivity.class.getSimpleName();
 
-    private List<String> tripTitleList;
-    private ArrayAdapter<String> mTripListAdapter;
-    private ListView tripListView;
+    private List<TripData> tripDataList;
+
     private int mPosition = 0;
 
     @Override
@@ -34,14 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
         TripDataBase tripDB = new TripDataBase(this);
 
-        tripTitleList = tripDB.getAllTripTitles();
+        tripDataList = tripDB.getAllTrips();
+        TripDataAdapter tripDataAdapter = new TripDataAdapter(this, tripDataList);
 
-        mTripListAdapter = new ArrayAdapter<> (this, R.layout.trip_list_item,
-                                                R.id.trip_list_item_textview,
-                                                tripTitleList );
-
-        tripListView = (ListView) findViewById(R.id.trip_list);
-        tripListView.setAdapter(mTripListAdapter);
+        ListView tripListView = (ListView) findViewById(R.id.trip_list);
+        tripListView.setAdapter(tripDataAdapter);
 
         registerForContextMenu(tripListView);
 
@@ -53,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
                 DialogFragment dialog = new TripDialog();
                 Bundle args = new Bundle();
-                args.putString("LIST_TITLE", tripTitleList.get(mPosition));
+                args.putString("LIST_TITLE", tripDataList.get(mPosition).getTitle());
                 dialog.setArguments(args);
                 dialog.show(getFragmentManager(), "Trip Details");
             }
@@ -79,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+ /*       switch (item.getItemId()) {
             case R.id.context_menu_delete:
                 AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
@@ -97,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(LOG_TAG, "onContextItemSelected: FELL THROUGH!");
                 break;
         }
+  */
         return true;
     }
 
@@ -140,8 +136,8 @@ public class MainActivity extends AppCompatActivity {
 
                 tdb.deleteALLTripDB(this);
 
-                mTripListAdapter.notifyDataSetChanged();
-                tripListView.setAdapter(mTripListAdapter);
+  //              mTripListAdapter.notifyDataSetChanged();
+  //              tripListView.setAdapter(mTripListAdapter);
 
                 tdb.close();
 
@@ -151,17 +147,17 @@ public class MainActivity extends AppCompatActivity {
 
                 Utility.populateTripDB(tdb);
 
-                mTripListAdapter.notifyDataSetChanged();
-                tripListView.setAdapter(mTripListAdapter);
+    //            mTripListAdapter.notifyDataSetChanged();
+    //            tripListView.setAdapter(mTripListAdapter);
 
                 tdb.close();
 
                 break;
             case R.id.main_menu_dump:
                 List<TripData> td = tdb.getAllTrips();
-                for (int i = 0; i < tripTitleList.size(); i++) {
-                    Log.d(LOG_TAG, td.get(i).toString());
-                }
+      //          for (int i = 0; i < tripTitleList.size(); i++) {
+      //              Log.d(LOG_TAG, td.get(i).toString());
+      //          }
                 tdb.close();
                 break;
             default:
@@ -180,73 +176,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void editTrip(View view) {
         Intent tripIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
-        tripIntent.putExtra("LIST_TITLE", tripTitleList.get(mPosition));
+        //tripIntent.putExtra("LIST_TITLE", tripTitleList.get(mPosition));
         startActivity(tripIntent);
     }
 
     public void sendTrip(View view) {
         TripDataBase tdb = new TripDataBase(this);
-        TripData tripData = tdb.getTrip(tripTitleList.get(mPosition));
+        //TripData tripData = tdb.getTrip(tripTitleList.get(mPosition));
 
-        Utility.sendMessage(this, tripData);
+        //Utility.sendMessage(this, tripData);
         tdb.close();
     }
 
-/*
-    private void populateTripDB(TripDataBase tdb) {
-        tdb.addTrip(new TripData("Nelson - Mountain Station",
-                                "http://www.trailforks.com/region/mountain-station/",
-                                R.drawable.nelson_mountain_station,
-                                "Brian K",
-                                TripData.BIKING_IDX));
-
-        tdb.addTrip(new TripData("Nelson - Giveout/Gold Creek",
-                                "http://www.trailforks.com/region/giveout-and-gold-creek/",
-                                R.drawable.nelson_giveout,
-                                "Brian K",
-                                TripData.BIKING_IDX));
-
-        tdb.addTrip(new TripData("Whistler - Bike Park",
-                                "http://www.trailforks.com/region/whistler-mountain-bike-park/",
-                                R.drawable.whistler_bike_park,
-                                "Brian K, Kay C",
-                                TripData.BIKING_IDX));
-
-        tdb.addTrip(new TripData("North Vancouver - Seymour",
-                                "http://www.trailforks.com/region/mount-seymour/",
-                                R.drawable.north_vancouver_seymour,
-                                "Brian K, Kay C, James W",
-                                TripData.BIKING_IDX));
-
-        tdb.addTrip(new TripData("North Vancouver - Fromme",
-                                "http://www.trailforks.com/region/mount-fromme/",
-                                R.drawable.north_vancouver_fromme,
-                                "Brian K, Kay C, James W, Chris W",
-                                TripData.BIKING_IDX));
-
-        tdb.addTrip(new TripData("Fraser Valley - Burke",
-                                "http://www.trailforks.com/region/burke-mountain/",
-                                R.drawable.fraser_valley_burke,
-                                "Brian K, Kay C, Chris W",
-                                TripData.BIKING_IDX));
-
-        tdb.addTrip(new TripData("Fraser Valley - Sumas",
-                                "http://www.trailforks.com/region/sumas-mountain/",
-                                R.drawable.fraser_valley_sumas,
-                                "Brian K, James W, Clayton M",
-                                TripData.BIKING_IDX));
-
-        tdb.addTrip(new TripData("Squamish - Diamond Head",
-                                "http://www.trailforks.com/region/diamond-head/",
-                                R.drawable.squamish_diamondhead,
-                                "Brian K, Kay C, Clayton M, James W",
-                                TripData.BIKING_IDX));
-
-        tdb.addTrip(new TripData("Squamish - Alice Lake",
-                                "http://www.trailforks.com/region/alice-lake--highlands/",
-                                R.drawable.squamish_alice_lake,
-                                "Brian K, Ryan B, Ashley S",
-                                TripData.BIKING_IDX));
-    }
- */
 }

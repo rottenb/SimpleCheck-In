@@ -62,7 +62,8 @@ public class TripDataBase extends SQLiteOpenHelper {
                 "map INTEGER, " +
                 "who TEXT, " +
                 "start TEXT, end TEXT, panic TEXT, " +
-                "activity INTEGER)";
+                "activity INTEGER, " +
+                "starred INTEGER)";
 
         db.execSQL(CREATE_TRIP_TABLE);
     }

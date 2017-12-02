@@ -125,4 +125,22 @@ public class TripData {
         return this.mActivity;
     }
 
+    public int getActivityIcon() {
+        switch (this.mActivity) {
+            case 0:
+                return R.drawable.ic_bike_black_24dp;
+            case 1:
+                return R.drawable.ic_ski_black_24dp;
+            case 2:
+                return R.drawable.ic_hiking_black_24dp;
+            case 3:
+                return R.drawable.ic_snowshoe_black_24dp;
+            case 4:
+                return R.drawable.ic_trail_run_black_24dp;
+            default:
+                return R.drawable.ic_walk_black_24dp;
+        }
+
+    }
+
 }

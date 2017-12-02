@@ -5,41 +5,74 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_marginBottom="15dp"
+    android:background="@color/colorPrimary">
 
-    <ImageView
-        android:id="@+id/dialog_activity_icon"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_bike_black_24dp"/>
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/dialog_where"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/black"
-        android:text="@string/trip_title_default"/>
+        <Button
+            android:id="@+id/dialog_starred"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="5dp"
+            android:backgroundTint="@color/colorAccent"
+            android:background="@drawable/ic_star_border_black_24dp"
+            android:onClick="setStarred"/>
 
-    <TextView
-        android:id="@+id/dialog_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/black"
-        android:text="@string/trip_when_start_default"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/dialog_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/dark_green"
-        android:text="@string/trip_when_end_default"/>
+            <TextView
+                android:id="@+id/dialog_where"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/trip_dialog_title_size"
+                android:text="@string/trip_title_default"/>
+
+            <TextView
+                android:id="@+id/dialog_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorAccent"
+                android:text="@string/trip_when_start_default"/>
+
+            <TextView
+                android:id="@+id/dialog_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorAccent"
+                android:text="@string/trip_when_end_default"/>
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/dialog_activity_icon"
+            android:contentDescription="@string/trip_dialog_activity"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/ic_bike_black_24dp"/>
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/dialog_map"
+        android:contentDescription="@string/trip_dialog_map"
         android:layout_width="@dimen/map_thumb_size"
         android:layout_height="@dimen/map_thumb_size"
         android:layout_gravity="center_horizontal"
@@ -52,28 +85,31 @@
         android:layout_gravity="center_horizontal">
 
         <Button
-            style="@android:style/Widget.Material.Light.Button.Inset"
             android:id="@+id/dialog_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@color/colorAccent"
             android:text="@string/trip_menu_send"
             android:onClick="sendTrip"/>
 
         <Button
-            style="@android:style/Widget.Material.Light.Button.Inset"
             android:id="@+id/dialog_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@color/colorAccent"
             android:text="@string/trip_menu_detail"/>
 
         <Button
-            style="@android:style/Widget.Material.Light.Button.Inset"
             android:id="@+id/dialog_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@color/colorAccent"
             android:text="@string/trip_menu_edit"
             android:onClick="editTrip"/>
     </LinearLayout>

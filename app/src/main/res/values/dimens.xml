@@ -11,6 +11,9 @@
     <dimen name="trip_display_left_margin">45dp</dimen>
     <dimen name="trip_icon_margin">5dp</dimen>
 
+    <!-- Dialog dimensions -->
+    <dimen name="trip_dialog_title_size">18sp</dimen>
+
     <!-- Sample image of map -->
     <dimen name="map_thumb_size">250dp</dimen>
 </resources>
