@@ -11,14 +11,14 @@
         android:orderInCategory="200"
         android:title="@string/main_menu_edit"/>
     <item
-        android:id="@+id/main_menu_user_settings"
-        android:orderInCategory="300"
-        android:title="@string/main_menu_user_settings"/>
-    <item
-        android:id="@+id/main_menu_app_settings"
+        android:id="@+id/main_menu_settings"
         android:orderInCategory="400"
-        android:title="@string/main_menu_app_settings"
-        app:showAsAction="never" />
+        android:title="@string/main_menu_settings"/>
+    <item
+        android:id="@+id/main_menu_about"
+        android:orderInCategory="500"
+        android:title="@string/main_menu_about"/>
+
 
     <item android:visible="true" android:id="@+id/m_area"
         android:titleCondensed="Areas"

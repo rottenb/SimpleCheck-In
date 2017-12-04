@@ -21,8 +21,9 @@
         </activity>
         <!-- Display selected trip -->
         <activity
-            android:name=".TripDetailActivity"
-            android:label="@string/trip_display_title"
+            android:name=".TripEditActivity"
+            android:label="@string/trip_edit_title"
+            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

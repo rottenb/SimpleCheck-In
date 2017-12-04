@@ -12,6 +12,8 @@ import java.util.List;
 
 /**
  * Created by rot on 2017-12-01
+ *
+ *  A custom list adapter for the trip entries in the database
  */
 
 public class TripDataAdapter extends ArrayAdapter<TripData> {
@@ -30,11 +32,11 @@ public class TripDataAdapter extends ArrayAdapter<TripData> {
                                                 parent,false);
         }
 
-        // Look up the views
+        // Get the views of the list
         TextView title = (TextView) convertView.findViewById(R.id.trip_list_item_textview);
         ImageView activity = (ImageView) convertView.findViewById(R.id.trip_list_activity_type);
 
-        // Populate data
+        // Populate the views with data
         title.setText(td.getTitle());
         activity.setBackgroundResource(td.getActivityIcon());
 

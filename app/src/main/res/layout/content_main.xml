@@ -22,17 +22,17 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/trip_list_add"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_margin="10dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="20dp"
         app:fabSize="normal"
         app:layout_anchor="@id/trip_list"
         app:layout_anchorGravity="bottom|end"
         app:backgroundTint="@color/colorAccent"
         android:scaleType="center"
-        android:src="@drawable/ic_note_add_black_24dp"
-        android:onClick="newTrip"
-        />
+        android:src="@drawable/ic_note_add_black_48dp"
+        android:tint="#885C7CA0"
+        android:onClick="createNewTrip"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

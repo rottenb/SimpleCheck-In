@@ -35,13 +35,13 @@ public class Utility {
                 "http://www.trailforks.com/region/mount-seymour/",
                 R.drawable.north_vancouver_seymour,
                 "Brian K, Kay C, James W",
-                TripData.BIKING_IDX));
+                TripData.SNOWSHOEING_IDX));
 
         tdb.addTrip(new TripData("North Vancouver - Fromme",
                 "http://www.trailforks.com/region/mount-fromme/",
                 R.drawable.north_vancouver_fromme,
                 "Brian K, Kay C, James W, Chris W",
-                TripData.BIKING_IDX));
+                TripData.SKIING_IDX));
 
         tdb.addTrip(new TripData("Fraser Valley - Burke",
                 "http://www.trailforks.com/region/burke-mountain/",
@@ -98,13 +98,14 @@ public class Utility {
 
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
         sendIntent.setType("message/rfc822");
-        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"brianmk@zombieworld.com"});
+        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"backcountry.checkin@gmail.com"});
         sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
         sendIntent.putExtra(Intent.EXTRA_TEXT, body);
 
         try {
             activity.startActivity(Intent.createChooser(sendIntent, "Email..."));
         } catch (android.content.ActivityNotFoundException ex) {
+            // Lolwut?
             Toast.makeText(activity, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
         }
     }
@@ -112,4 +113,5 @@ public class Utility {
     static public void editTrip() {
 
     }
+
 }

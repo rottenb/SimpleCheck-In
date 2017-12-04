@@ -17,7 +17,7 @@ public class TripData {
     private String mTitle;
     private String mWho;
     private String mLocation;
-    private int mDrawable;
+    private int mMapDrawable;
     private String mWhenStart;
     private String mWhenEnd;
     private String mWhenPanic;
@@ -34,7 +34,7 @@ public class TripData {
         this.mTitle = "Where";
         this.mLocation = "http://www.trailforks.com";
         this.mWho = "Who";
-        this.mDrawable = R.drawable.stand_by;
+        this.mMapDrawable = R.drawable.stand_by;
         this.mWhenStart = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenEnd = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenPanic = DateFormat.getDateTimeInstance().format(new Date());
@@ -44,7 +44,7 @@ public class TripData {
     public TripData(String title, String location, int drawable, String who, int activity_idx) {
         this.mTitle = title;
         this.mLocation = location;
-        this.mDrawable = drawable;
+        this.mMapDrawable = drawable;
         this.mWho = who;
         this.mWhenStart = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenEnd = DateFormat.getDateTimeInstance().format(new Date());
@@ -55,7 +55,7 @@ public class TripData {
     @Override
     public String toString() {
         return "TripData [id=" + mId + ", title=" + mTitle + ", location=" + mLocation + "/n" +
-                ", drawable=" + mDrawable +
+                ", drawable=" + mMapDrawable +
                 ", who=" + mWho +
                 ", start=" + mWhenStart + ", end=" + mWhenEnd + ", panic =" + mWhenPanic +
                 ", activity=" + mActivity +
@@ -83,12 +83,10 @@ public class TripData {
         return this.mLocation;
     }
 
-    public void setDrawable(int drawable) {
-        this.mDrawable = drawable;
+    public void setMapDrawable(int drawable) {
+        this.mMapDrawable = drawable;
     }
-    public int getDrawable() {
-        return this.mDrawable;
-    }
+    public int getMapDrawable() { return this.mMapDrawable; }
 
     public void setWho(String who) {
         this.mWho = who;
