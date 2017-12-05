@@ -6,6 +6,16 @@
     android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/trip_list_fav"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_star_border_black_48dp"
+            android:backgroundTint="#665C7CA0"
+            />
+
+        <ImageView
             android:id="@+id/trip_list_activity_type"
             android:contentDescription="@string/trip_list_activity_description"
             android:layout_width="wrap_content"

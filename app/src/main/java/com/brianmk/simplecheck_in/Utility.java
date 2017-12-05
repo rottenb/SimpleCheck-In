@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
 
+import java.util.Comparator;
+
 /**
  * Created by rot on 2016-10-27.
  *
@@ -17,75 +19,85 @@ public class Utility {
                 "http://www.trailforks.com/region/mountain-station/",
                 R.drawable.nelson_mountain_station,
                 "Brian K, Christine W",
-                TripData.HIKING_IDX));
+                TripData.HIKING_IDX,
+                1));
 
         tdb.addTrip(new TripData("Nelson - Giveout/Gold Creek",
                 "http://www.trailforks.com/region/giveout-and-gold-creek/",
                 R.drawable.nelson_giveout,
                 "Brian K",
-                TripData.BIKING_IDX));
+                TripData.BIKING_IDX,
+                1));
 
         tdb.addTrip(new TripData("Whistler - Bike Park",
                 "http://www.trailforks.com/region/whistler-mountain-bike-park/",
                 R.drawable.whistler_bike_park,
                 "Brian K, Kay C",
-                TripData.BIKING_IDX));
+                TripData.BIKING_IDX,
+                0));
 
         tdb.addTrip(new TripData("North Vancouver - Seymour",
                 "http://www.trailforks.com/region/mount-seymour/",
                 R.drawable.north_vancouver_seymour,
                 "Brian K, Kay C, James W",
-                TripData.SNOWSHOEING_IDX));
+                TripData.SNOWSHOEING_IDX,
+                1));
 
         tdb.addTrip(new TripData("North Vancouver - Fromme",
                 "http://www.trailforks.com/region/mount-fromme/",
                 R.drawable.north_vancouver_fromme,
                 "Brian K, Kay C, James W, Chris W",
-                TripData.SKIING_IDX));
+                TripData.SKIING_IDX,
+                0));
 
         tdb.addTrip(new TripData("Fraser Valley - Burke",
                 "http://www.trailforks.com/region/burke-mountain/",
                 R.drawable.fraser_valley_burke,
                 "Brian K, Kay C, Chris W",
-                TripData.BIKING_IDX));
+                TripData.BIKING_IDX,
+                0));
 
         tdb.addTrip(new TripData("Fraser Valley - Sumas",
                 "http://www.trailforks.com/region/sumas-mountain/",
                 R.drawable.fraser_valley_sumas,
                 "Brian K, James W, Clayton M",
-                TripData.BIKING_IDX));
+                TripData.BIKING_IDX,
+                1));
 
         tdb.addTrip(new TripData("Squamish - Diamond Head",
                 "http://www.trailforks.com/region/diamond-head/",
                 R.drawable.squamish_diamondhead,
                 "Brian K, Kay C, Clayton M, James W",
-                TripData.BIKING_IDX));
+                TripData.BIKING_IDX,
+                1));
 
         tdb.addTrip(new TripData("Squamish - Alice Lake",
                 "http://www.trailforks.com/region/alice-lake--highlands/",
                 R.drawable.squamish_alice_lake,
                 "Brian K, Ryan B, Ashley S",
-                TripData.BIKING_IDX));
+                TripData.BIKING_IDX,
+                1));
 
         tdb.addTrip(new TripData("Squamish - Diamond Head (ski)",
                 "http://www.trailforks.com/region/diamond-head/",
                 R.drawable.squamish_diamondhead,
                 "Brian K, Kay C, Clayton M",
-                TripData.SKIING_IDX));
+                TripData.SKIING_IDX,
+                0));
 
         tdb.addTrip(new TripData("Whistler - Whistler Mountain",
                 "http://www.trailforks.com/region/whistler-mountain-bike-park/",
                 R.drawable.whistler_bike_park,
                 "Brian K, Kay C, Kirsten R",
-                TripData.SKIING_IDX));
+                TripData.SKIING_IDX,
+                0));
 
         tdb.addTrip(new TripData("Bellingham - Galbraith",
                 "http://www.trailforks.com/region/galbraith/",
                 R.drawable.galbraith,
                 "Brian K, Kay C, Dylan M, Chris D",
-                TripData.BIKING_IDX));
-
-
+                TripData.BIKING_IDX,
+                0));
     }
 
     static public void sendMessage(Activity activity, TripData tripData) {
@@ -109,9 +121,23 @@ public class Utility {
             Toast.makeText(activity, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
         }
     }
+}
 
-    static public void editTrip() {
 
+class TripTitleComparator implements Comparator<TripData> {
+    public int compare(TripData t1, TripData t2) {
+        return t1.getTitle().compareTo(t2.getTitle());
     }
+}
 
+class TripActivityComparator implements Comparator<TripData> {
+    public int compare(TripData t1, TripData t2) {
+        return t1.getActivity() - t2.getActivity();
+    }
+}
+
+class TripFavouriteComparator implements Comparator<TripData> {
+    public int compare(TripData t1, TripData t2) {
+        return t2.getFav() - t1.getFav();
+    }
 }

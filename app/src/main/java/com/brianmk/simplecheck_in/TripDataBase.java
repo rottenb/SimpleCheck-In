@@ -34,6 +34,7 @@ public class TripDataBase extends SQLiteOpenHelper {
     private static final String KEY_END = "end";
     private static final String KEY_PANIC = "panic";
     private static final String KEY_ACTIVITY = "activity";
+    private static final String KEY_FAVOURITE = "fav";
 
     private static final int ID_OFFSET = 0;
     private static final int TITLE_OFFSET = 1;
@@ -44,9 +45,10 @@ public class TripDataBase extends SQLiteOpenHelper {
     private static final int WHEN_END_OFFSET = 6;
     private static final int WHEN_PANIC_OFFSET = 7;
     private static final int ACTIVITY_OFFSET = 8;
+    private static final int FAVOURITE_OFFSET = 9;
 
     private static final String[] COLUMNS = {KEY_ID, KEY_TITLE, KEY_LOCATION, KEY_MAP, KEY_WHO,
-                                                KEY_START, KEY_END, KEY_PANIC, KEY_ACTIVITY};
+                                                KEY_START, KEY_END, KEY_PANIC, KEY_ACTIVITY, KEY_FAVOURITE};
 
     public TripDataBase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -62,7 +64,7 @@ public class TripDataBase extends SQLiteOpenHelper {
                 "who TEXT, " +
                 "start TEXT, end TEXT, panic TEXT, " +
                 "activity INTEGER, " +
-                "starred INTEGER)";
+                "fav INTEGER)";
 
         db.execSQL(CREATE_TRIP_TABLE);
     }
@@ -100,6 +102,7 @@ public class TripDataBase extends SQLiteOpenHelper {
         values.put(KEY_END, tripData.getWhenEnd());
         values.put(KEY_PANIC, tripData.getWhenPanic());
         values.put(KEY_ACTIVITY, tripData.getActivity());
+        values.put(KEY_FAVOURITE, tripData.getFav());
 
         db.insert(TABLE_TRIPS, null, values);
 
@@ -178,6 +181,7 @@ public class TripDataBase extends SQLiteOpenHelper {
         tripData.setWhenEnd(DateFormat.getDateTimeInstance().format(new Date()));
         tripData.setWhenPanic(DateFormat.getDateTimeInstance().format(new Date()));
         tripData.setActivity(cursor.getInt(ACTIVITY_OFFSET));
+        tripData.setFav(cursor.getInt(FAVOURITE_OFFSET));
 
         cursor.close();
         db.close();
@@ -206,6 +210,7 @@ public class TripDataBase extends SQLiteOpenHelper {
                 tripData.setWhenEnd(DateFormat.getDateTimeInstance().format(new Date()));
                 tripData.setWhenPanic(DateFormat.getDateTimeInstance().format(new Date()));
                 tripData.setActivity(cursor.getInt(ACTIVITY_OFFSET));
+                tripData.setFav(cursor.getInt(FAVOURITE_OFFSET));
 
                 trips.add(tripData);
             } while (cursor.moveToNext());
@@ -276,6 +281,7 @@ public class TripDataBase extends SQLiteOpenHelper {
         values.put(KEY_END, tripData.getWhenEnd());
         values.put(KEY_PANIC, tripData.getWhenPanic());
         values.put(KEY_ACTIVITY, tripData.getActivity());
+        values.put(KEY_FAVOURITE, tripData.getFav());
 
         db.replace(TABLE_TRIPS, null, values);
 

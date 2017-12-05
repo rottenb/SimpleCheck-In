@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private TripDataAdapter tripDataAdapter;
 
     private int mPosition = 0;
+    private boolean bFavouriteOnTop = false;
 
     final int EDIT_REQUEST_CODE = 100;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         tripDataList = tripDB.getAllTrips();
         if (tripDataList.size() == 0) {
-            setContentView(R.layout.blank_trip_list);
+            setContentView(R.layout.activity_main_blank);
         } else {
             setContentView(R.layout.activity_main);
         }
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.context_menu, menu);
-    }
+    } // onCreateContextMenu()
 
     @Override
     public boolean onContextItemSelected(MenuItem menuItem) {
@@ -105,11 +106,15 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.context_menu_delete:
-                Log.d(LOG_TAG, "onContextItemSelected: DELETE ITEM #" + menuInfo.position);
                 TripDataBase tbd = new TripDataBase(this);
                 tbd.deleteTrip(tripDataList.get(menuInfo.position).getTitle());
                 refreshData();
                 tbd.close();
+                if (tripDataList.size() == 0) {
+                    setContentView(R.layout.activity_main_blank);
+                    finish();
+                    startActivity(getIntent());
+                }
                 break;
             default:
                 Log.d(LOG_TAG, "onContextItemSelected: VIEW ITEM");
@@ -117,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return true;
-    }
+    } // onContextItemSelected()
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -136,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
+    } // onCreateOptionsMenu()
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -152,8 +157,25 @@ public class MainActivity extends AppCompatActivity {
             case R.id.main_menu_add:
                 createNewTrip();
                 break;
-            case R.id.main_menu_edit:
-                Log.d(LOG_TAG, "edit");
+            case R.id.sort_title:
+                Collections.sort(tripDataList, new TripTitleComparator());
+                if (bFavouriteOnTop) {
+                    Collections.sort(tripDataList, new TripFavouriteComparator());
+                }
+                tripDataAdapter.notifyDataSetChanged();
+                break;
+            case R.id.sort_activity:
+                Collections.sort(tripDataList, new TripActivityComparator());
+                if (bFavouriteOnTop) {
+                    Collections.sort(tripDataList, new TripFavouriteComparator());
+                }
+                tripDataAdapter.notifyDataSetChanged();
+                break;
+            case R.id.sort_favourites_top:
+                item.setChecked(!item.isChecked());
+                bFavouriteOnTop = !bFavouriteOnTop;
+                Collections.sort(tripDataList, new TripFavouriteComparator());
+                tripDataAdapter.notifyDataSetChanged();
                 break;
             case R.id.main_menu_settings:
                 Log.d(LOG_TAG, "user settings");
@@ -163,21 +185,23 @@ public class MainActivity extends AppCompatActivity {
                 dialog.show(getFragmentManager(), null);
                 break;
             case R.id.main_menu_delete_db:
+                // Delete all and restart the main activity with a blank layout
                 tdb.deleteALLTripDB(this);
-                refreshData();
+                finish();
+                startActivity(getIntent());
                 break;
             case R.id.main_menu_create_db:
+                // Pop. database, change to pop'd layout, restart main activity
                 Utility.populateTripDB(tdb);
-                refreshData();
+                setContentView(R.layout.activity_main);
+                finish();
+                startActivity(getIntent());
                 break;
             case R.id.main_menu_dump:
                 List<TripData> td = tdb.getAllTrips();
-                for (int i = 0; i < tripDataList.size(); i++) {
-                    Log.d(LOG_TAG, td.get(i).getTitle());
-                }
                 break;
             default:
-                // gets called when the admin sub-menu gets tapped
+                // gets called when the sub-menu gets tapped
                 //  (do nothing)
                 break;
         }
@@ -185,19 +209,26 @@ public class MainActivity extends AppCompatActivity {
         tdb.close();
 
         return super.onOptionsItemSelected(item);
-    }
+    } //onOptionsItemSelected()
 
     public void createNewTrip(View v) {
         Intent tripIntent = new Intent(getApplicationContext(), TripEditActivity.class);
         tripIntent.putExtra("ACTION", "ADD");
         startActivityForResult(tripIntent, EDIT_REQUEST_CODE);
-    }
+    } // createNewTrip(View)
 
     public void createNewTrip() {
+        // If this is the first entry, change the layout and refresh
+        if (tripDataList.size() == 0) {
+            setContentView(R.layout.activity_main_blank);
+            finish();
+            startActivity(getIntent());
+        }
+
         Intent tripIntent = new Intent(getApplicationContext(), TripEditActivity.class);
         tripIntent.putExtra("ACTION", "ADD");
         startActivityForResult(tripIntent, EDIT_REQUEST_CODE);
-    }
+    }  // createNewTrip()
 
     public void refreshData() {
         TripDataBase tdb = new TripDataBase(this);
@@ -208,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
         tripDataAdapter.notifyDataSetChanged();
 
         tdb.close();
-    }
+    } // refreshData()
 
 
 

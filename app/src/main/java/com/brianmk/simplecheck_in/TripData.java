@@ -21,6 +21,7 @@ public class TripData {
     private String mWhenStart;
     private String mWhenEnd;
     private String mWhenPanic;
+    private int mFav;
     private int mActivity;
 
     public static final int BIKING_IDX = 0;
@@ -39,9 +40,10 @@ public class TripData {
         this.mWhenEnd = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenPanic = DateFormat.getDateTimeInstance().format(new Date());
         this.mActivity = 0;
+        this.mFav = 0;
     }
 
-    public TripData(String title, String location, int drawable, String who, int activity_idx) {
+    public TripData(String title, String location, int drawable, String who, int activity_idx, int fav) {
         this.mTitle = title;
         this.mLocation = location;
         this.mMapDrawable = drawable;
@@ -50,6 +52,7 @@ public class TripData {
         this.mWhenEnd = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenPanic = DateFormat.getDateTimeInstance().format(new Date());
         this.mActivity = activity_idx;
+        this.mFav = fav;
     }
 
     @Override
@@ -59,6 +62,7 @@ public class TripData {
                 ", who=" + mWho +
                 ", start=" + mWhenStart + ", end=" + mWhenEnd + ", panic =" + mWhenPanic +
                 ", activity=" + mActivity +
+                ", favourite=" + mFav +
                 "]";
     }
 
@@ -138,7 +142,17 @@ public class TripData {
             default:
                 return R.drawable.ic_walk_black_24dp;
         }
-
     }
+
+    public void setFav(int f) { this.mFav = f; }
+    public int getFav() { return this.mFav; }
+    public int getFavIcon() {
+        if (mFav == 1) {
+            return R.drawable.ic_star_fill_yellow_48dp;
+        } else {
+            return 0;
+        }
+    }
+
 
 }
