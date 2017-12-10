@@ -32,14 +32,14 @@ public class TripData {
     public static final int OTHER_ACT_IDX = 5;
 
     public TripData() {
-        this.mTitle = "Where";
-        this.mLocation = "http://www.trailforks.com";
-        this.mWho = "Who";
+        this.mTitle = "";
+        this.mLocation = "";
+        this.mWho = "";
         this.mMapDrawable = R.drawable.stand_by;
         this.mWhenStart = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenEnd = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenPanic = DateFormat.getDateTimeInstance().format(new Date());
-        this.mActivity = 0;
+        this.mActivity = OTHER_ACT_IDX;
         this.mFav = 0;
     }
 
@@ -153,6 +153,5 @@ public class TripData {
             return 0;
         }
     }
-
 
 }

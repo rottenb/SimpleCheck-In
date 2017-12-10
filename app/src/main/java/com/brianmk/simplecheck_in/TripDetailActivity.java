@@ -1,11 +1,10 @@
 package com.brianmk.simplecheck_in;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,23 +12,23 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 /**
- * Created by rot on 2016-10-14.
+ * Created by rot on 2017-12-07.
  *
- * Brings up dialogue to edit a given trip's data
  */
 
-public class TripEditActivity extends AppCompatActivity {
-    private static final String LOG_TAG = TripEditActivity.class.getSimpleName();
-
+public class TripDetailActivity extends AppCompatActivity {
+    private static final String LOG_TAG = TripDetailActivity.class.getSimpleName();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.trip_edit);
+        setContentView(R.layout.trip_detail);
 
-        ((Toolbar) findViewById(R.id.edit_toolbar)).setTitle("Edit Trip");
-
+        // This is necessary to have an img under the status bar
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
     } // onCreate()
 
@@ -37,29 +36,27 @@ public class TripEditActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        final Intent returnIntent = new Intent();
-
         final TripDataBase tripDataBase = new TripDataBase(this);
         final TripData tripData;
 
+        final Intent returnIntent = new Intent();
+
         // Bring up data or create new
         if (getIntent().getStringExtra("TITLE") == null) {
+            DialogFragment ntd = new NewTripDialog();
+            ntd.show(getFragmentManager(), "Trip Details");
+
             tripData = new TripData();
+
         } else {
             tripData = tripDataBase.getTrip(getIntent().getStringExtra("TITLE"));
         }
 
         // Trip title
-        EditText tripTitle = (EditText) findViewById(R.id.trip_title);
-        tripTitle.setText(tripData.getTitle());
+        ((EditText) findViewById(R.id.trip_title)).setText(tripData.getTitle());
 
-        // Who
-        EditText tripWho = (EditText) findViewById(R.id.trip_who);
-        tripWho.setText(tripData.getWho());
-
-        // Map
-        ImageView tripMap = (ImageView) findViewById(R.id.trip_map);
-        tripMap.setBackgroundResource(tripData.getMapDrawable());
+        // Who's going
+        ((EditText) findViewById(R.id.trip_who)).setText(tripData.getWho());
 
         // Activity type
         Spinner activitySpinner = (Spinner) findViewById(R.id.trip_activity);
@@ -67,42 +64,33 @@ public class TripEditActivity extends AppCompatActivity {
                 R.array.activities_array, R.layout.spinner_item);
         activityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         activitySpinner.setAdapter(activityAdapter);
-        activitySpinner.setSelection(tripData.getActivity());
+        int act = tripData.getActivity();
+        activitySpinner.setSelection(act);
 
-        final ImageView activityIcon = (ImageView) findViewById(R.id.trip_activity_icon);
-        activityIcon.setBackgroundResource(tripData.getActivityIcon());
+        // Set background as per season (ACTIVITY until I figure out DATEs)
+        switch (act) {
+            case TripData.BIKING_IDX:
+                ((ImageView) findViewById(R.id.detail_season_img)).setImageResource(R.drawable.summer);
+                break;
+            case TripData.SKIING_IDX:
+                ((ImageView) findViewById(R.id.detail_season_img)).setImageResource(R.drawable.winter);
+                break;
+            case TripData.HIKING_IDX:
+                ((ImageView) findViewById(R.id.detail_season_img)).setImageResource(R.drawable.spring);
+                break;
+            case TripData.SNOWSHOEING_IDX:
+                ((ImageView) findViewById(R.id.detail_season_img)).setImageResource(R.drawable.winter);
+                break;
+            case TripData.TRAIL_RUN_IDX:
+                ((ImageView) findViewById(R.id.detail_season_img)).setImageResource(R.drawable.fall);
+                break;
+            case TripData.OTHER_ACT_IDX:
+                ((ImageView) findViewById(R.id.detail_season_img)).setImageResource(R.drawable.all_seasons);
+                break;
+            default:
+        }
 
-        activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i) {
-                    case 0:
-                        activityIcon.setBackgroundResource(R.drawable.ic_bike_black_24dp);
-                        break;
-                    case 1:
-                        activityIcon.setBackgroundResource(R.drawable.ic_ski_black_24dp);
-                        break;
-                    case 2:
-                        activityIcon.setBackgroundResource(R.drawable.ic_hiking_black_24dp);
-                        break;
-                    case 3:
-                        activityIcon.setBackgroundResource(R.drawable.ic_snowshoe_black_24dp);
-                        break;
-                    case 4:
-                        activityIcon.setBackgroundResource(R.drawable.ic_trail_run_black_24dp);
-                        break;
-                    default:
-                        activityIcon.setBackgroundResource(R.drawable.ic_walk_black_24dp);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        Button  saveButton = (Button) findViewById(R.id.trip_save_button);
+        Button saveButton = (Button) findViewById(R.id.trip_save_button);
 
         if (getIntent().getStringExtra("ACTION").equals("SAVE")) {
             saveButton.setText("SAVE");
@@ -137,7 +125,7 @@ public class TripEditActivity extends AppCompatActivity {
         Button sendButton = (Button) findViewById(R.id.trip_send_button);
         sendButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Utility.sendMessage(TripEditActivity.this, tripData);
+                Utility.sendMessage(TripDetailActivity.this, tripData);
             }
         });
 
@@ -153,23 +141,9 @@ public class TripEditActivity extends AppCompatActivity {
             }
         });
 
+
+
         tripDataBase.close();
 
     } // onResume()
-
-    public void showTimePicker(View view) {
-        TimePickerFragment timePicker = new TimePickerFragment();
-        Bundle args = new Bundle();
-        args.putInt("WHEN_ID", view.getId());
-
-        timePicker.setArguments(args);
-        timePicker.show(getFragmentManager(), "timePicker");
-
-
-    } // showTimePicker()
-
-    private void onSaveClick() {
-
-    } // onSaveClick()
-
-} // TripEditActivity
+}

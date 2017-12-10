@@ -43,21 +43,34 @@
     <string name="trip_dialog_activity">Activity</string>
     <string name="trip_dialog_map">Map</string>
 
+    <!-- New Trip Dialog -->
+    <string name="new_dialog_title">New Trip Title:</string>
+    <string name="new_dialog_title_hint"> </string>
+
+
     <!-- About Dialog -->
     <string name="about_dialog_icon">icon</string>
-    <string name="about_dialog_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet mauris finibus, aliquet leo ut, iaculis elit. Vivamus quis dolor non augue finibus cursus id consectetur leo. Quisque aliquam ut tortor nec malesuada. Sed ultricies eros non nisl efficitur euismod. Vestibulum rutrum ultricies sodales. Vestibulum porta tincidunt mattis. Morbi.</string>
+    <string name="about_dialog_text">A simple way to give friends and family details about your backcountry adventure.\n\nIn the case of emergency, they can pass this information on to the police, search and rescue, or park rangers and staff.</string>
+    <string name="about_dialog_web_icon">Web Icon</string>
+    <string name="about_dialog_web">http://backcountrycheckin.com</string>
+    <string name="about_dialog_email">backcountry.checkin@gmail.com</string>
     <string name="about_dialog_ok">OK</string>
 
 
     <!-- Trip Editor -->
     <string name="trip_edit_title">Edit Trip</string>
 
-    <!-- Trip attributes -->
-    <string name="trip_attr_icon">Icon For Trip Attribute</string>
-    <string name="trip_map">Stolen from Trailforks.com</string>
-    <string name="trip_title_default">Trip Name</string>
-    <string name="trip_who_default">Who</string>
-    <string name="trip_spinner_drop">drop</string>
+    <!-- Trip Details -->
+    <string name="detail_season_img">STOLEN FROM GIS</string>
+    <string name="detail_gradient">white gradient</string>
+    <string name="detail_title_hint">Trip Title</string>
+    <string name="detail_start">START:</string>
+    <string name="detail_date_hint">00 DEC 0000</string>
+    <string name="detail_time_hint">00:00</string>
+    <string name="detail_end">   END:  </string>
+    <string name="detail_who">WHO:</string>
+    <string name="detail_who_hint">List of Names</string>
+    <string name="detail_what">WHAT:</string>
     <string-array name="activities_array">
         <item>Mountain Biking</item>
         <item>Skiing</item>
@@ -66,11 +79,22 @@
         <item>Trail Running</item>
         <item>Other</item>
     </string-array>
+    <string name="detail_where">WHERE:</string>
+    <string name="detail_where_hint">Location Name</string>
+    <string name="detail_map_img">screen cap</string>
+    <string name="detail_notes">" Notes:"</string>
+
+    <!-- Trip attributes -->
+    <string name="trip_attr_icon">Icon For Trip Attribute</string>
+    <string name="trip_map">Stolen from Trailforks.com</string>
+    <string name="trip_title_default">Trip Name</string>
+    <string name="trip_who_default">Who</string>
+    <string name="trip_spinner_drop">drop</string>
     <string name="trip_where_default">Where</string>
     <string name="trip_when_start_default">Sat Oct 22  06:00</string>
     <string name="trip_when_end_default">Sat Oct 22  16:30</string>
     <string name="trip_when_panic_default">Sat Oct 22  21:00</string>
-    <string name="trip_notes">Notes:</string>
+    <string name="trip_notes">  Notes:</string>
 
     <!-- App Settings -->
     <string name="settings_default_email_label">Send Email To:</string>

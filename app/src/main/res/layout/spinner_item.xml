@@ -6,10 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:textColor="@color/colorAccent"
-    android:textSize="16sp"
-    android:padding="10dp"
-    android:text="Select Activity"
-    android:background="@drawable/spinner_border">
+    android:textColor="@color/colorPrimaryDark"
+    android:textSize="@dimen/detail_heading_font_size"
+    android:text="Select Activity">
 
 </TextView>

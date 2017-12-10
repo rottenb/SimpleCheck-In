@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TimePicker;
 
@@ -28,6 +29,7 @@ public class TimePickerFragment extends DialogFragment
 
     public void onTimeSet(TimePicker view, int hour, int minute) {
 
+        Log.d(LOG_TAG, "time set");
         Button button = (Button) getActivity().findViewById(resId);
         button.setText(hour + ":" + minute);
         button.refreshDrawableState();
