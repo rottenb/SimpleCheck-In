@@ -148,7 +148,7 @@ public class TripData {
     public int getFav() { return this.mFav; }
     public int getFavIcon() {
         if (mFav == 1) {
-            return R.drawable.ic_star_fill_yellow_48dp;
+            return R.drawable.ic_star_black_24dp;
         } else {
             return 0;
         }

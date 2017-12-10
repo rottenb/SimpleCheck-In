@@ -34,6 +34,8 @@
             android:layout_marginTop="-40dp"
             android:layout_marginStart="5dp"
             android:background="@null"
+            android:drawableEnd="@drawable/ic_border_color_black_48dp"
+            android:drawableTint="@color/colorPrimaryDark"
             android:textSize="@dimen/detail_title_font_size"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"

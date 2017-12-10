@@ -35,28 +35,31 @@
                 android:background="@android:color/transparent"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
         </android.support.design.widget.AppBarLayout>
-
-        <ListView
-            android:id="@+id/trip_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:dividerHeight="5dp"
-            android:divider="@android:color/transparent"
-            android:layout_gravity="center_horizontal"/>
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/trip_list_add"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_margin="20dp"
-            app:fabSize="normal"
-            app:layout_anchor="@id/trip_list"
-            app:layout_anchorGravity="bottom|end"
-            app:backgroundTint="@color/colorAccent"
-            android:scaleType="center"
-            android:src="@drawable/ic_note_add_black_48dp"
-            android:tint="#885C7CA0"
-            android:onClick="createNewTrip"/>
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/trip_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="105dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:dividerHeight="5dp"
+        android:divider="@android:color/transparent"
+        android:layout_gravity="center_horizontal"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/trip_list_add"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="20dp"
+        app:fabSize="normal"
+        app:layout_anchor="@id/trip_list"
+        app:layout_anchorGravity="bottom|end"
+        app:backgroundTint="@color/colorAccent"
+        android:scaleType="center"
+        android:src="@drawable/ic_note_add_black_48dp"
+        android:tint="#885C7CA0"
+        android:onClick="createNewTrip"/>
 </android.support.design.widget.CoordinatorLayout>
