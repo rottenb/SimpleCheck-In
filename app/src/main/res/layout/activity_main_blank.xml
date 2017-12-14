@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +16,6 @@
     tools:context="com.brianmk.simplecheck_in.MainActivity">
 
     <LinearLayout
-
         android:id="@+id/main_activity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,5 +63,23 @@
                 android:textSize="@dimen/trip_dialog_title_size" />
         </LinearLayout>
 
+        <!-- ListView stays hidden below screen, to avoid null object errors -->
+        <ListView
+            android:id="@+id/trip_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
+<!--
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_menu" />
+-->
+    <include
+        layout="@layout/navigation_drawer"/>
+</android.support.v4.widget.DrawerLayout>

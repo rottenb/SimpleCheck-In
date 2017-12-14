@@ -102,7 +102,6 @@ public class TripDataBase extends SQLiteOpenHelper {
         values.put(KEY_END, tripData.getWhenEnd());
         values.put(KEY_PANIC, tripData.getWhenPanic());
         values.put(KEY_ACTIVITY, tripData.getActivity());
-        values.put(KEY_FAVOURITE, tripData.getFav());
 
         db.insert(TABLE_TRIPS, null, values);
 
@@ -169,7 +168,7 @@ public class TripDataBase extends SQLiteOpenHelper {
             db.close();
 
             return null;
-        };
+        }
 
         TripData tripData = new TripData();
         tripData.setId(cursor.getInt(ID_OFFSET));
@@ -181,7 +180,6 @@ public class TripDataBase extends SQLiteOpenHelper {
         tripData.setWhenEnd(DateFormat.getDateTimeInstance().format(new Date()));
         tripData.setWhenPanic(DateFormat.getDateTimeInstance().format(new Date()));
         tripData.setActivity(cursor.getInt(ACTIVITY_OFFSET));
-        tripData.setFav(cursor.getInt(FAVOURITE_OFFSET));
 
         cursor.close();
         db.close();
@@ -210,7 +208,6 @@ public class TripDataBase extends SQLiteOpenHelper {
                 tripData.setWhenEnd(DateFormat.getDateTimeInstance().format(new Date()));
                 tripData.setWhenPanic(DateFormat.getDateTimeInstance().format(new Date()));
                 tripData.setActivity(cursor.getInt(ACTIVITY_OFFSET));
-                tripData.setFav(cursor.getInt(FAVOURITE_OFFSET));
 
                 trips.add(tripData);
             } while (cursor.moveToNext());
@@ -281,7 +278,6 @@ public class TripDataBase extends SQLiteOpenHelper {
         values.put(KEY_END, tripData.getWhenEnd());
         values.put(KEY_PANIC, tripData.getWhenPanic());
         values.put(KEY_ACTIVITY, tripData.getActivity());
-        values.put(KEY_FAVOURITE, tripData.getFav());
 
         db.replace(TABLE_TRIPS, null, values);
 

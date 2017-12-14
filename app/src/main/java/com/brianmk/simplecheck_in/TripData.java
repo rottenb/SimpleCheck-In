@@ -21,7 +21,6 @@ public class TripData {
     private String mWhenStart;
     private String mWhenEnd;
     private String mWhenPanic;
-    private int mFav;
     private int mActivity;
 
     public static final int BIKING_IDX = 0;
@@ -35,12 +34,11 @@ public class TripData {
         this.mTitle = "";
         this.mLocation = "";
         this.mWho = "";
-        this.mMapDrawable = R.drawable.stand_by;
+        this.mMapDrawable = R.drawable.ic_landscape_black_48dp;
         this.mWhenStart = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenEnd = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenPanic = DateFormat.getDateTimeInstance().format(new Date());
         this.mActivity = OTHER_ACT_IDX;
-        this.mFav = 0;
     }
 
     public TripData(String title, String location, int drawable, String who, int activity_idx, int fav) {
@@ -52,7 +50,6 @@ public class TripData {
         this.mWhenEnd = DateFormat.getDateTimeInstance().format(new Date());
         this.mWhenPanic = DateFormat.getDateTimeInstance().format(new Date());
         this.mActivity = activity_idx;
-        this.mFav = fav;
     }
 
     @Override
@@ -62,7 +59,6 @@ public class TripData {
                 ", who=" + mWho +
                 ", start=" + mWhenStart + ", end=" + mWhenEnd + ", panic =" + mWhenPanic +
                 ", activity=" + mActivity +
-                ", favourite=" + mFav +
                 "]";
     }
 
@@ -126,7 +122,6 @@ public class TripData {
     public int getActivity() {
         return this.mActivity;
     }
-
     public int getActivityIcon() {
         switch (this.mActivity) {
             case 0:
@@ -144,14 +139,5 @@ public class TripData {
         }
     }
 
-    public void setFav(int f) { this.mFav = f; }
-    public int getFav() { return this.mFav; }
-    public int getFavIcon() {
-        if (mFav == 1) {
-            return R.drawable.ic_star_black_24dp;
-        } else {
-            return 0;
-        }
-    }
 
 }

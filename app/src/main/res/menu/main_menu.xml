@@ -15,10 +15,6 @@
             <menu
                 android:id="@+id/main_menu_sort">
                 <item
-                    android:id="@+id/sort_favourites_top"
-                    android:checkable="true"
-                    android:title="@string/sort_favourites_top"/>
-                <item
                     android:id="@+id/sort_title"
                     android:title="@string/sort_title"/>
                 <item

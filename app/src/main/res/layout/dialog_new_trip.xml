@@ -16,6 +16,7 @@
         android:text="@string/new_dialog_title"/>
 
     <EditText
+        android:id="@+id/new_trip_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/detail_title_font_size"

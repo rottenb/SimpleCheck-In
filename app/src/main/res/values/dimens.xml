@@ -4,8 +4,14 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <!-- Nav drawer -->
+    <dimen name="nav_profile_font">18sp</dimen>
+
+    <!-- Partner List -->
+    <dimen name="partner_font_size">18sp</dimen>
+
     <!-- Trip display (editor and viewer) -->
-    <dimen name="trip_display_font">20sp</dimen>
+    <dimen name="trip_display_font">25sp</dimen>
     <dimen name="trip_display_vertical_margin">20dp</dimen>
     <dimen name="trip_display_horizontal_margin">5dp</dimen>
     <dimen name="trip_display_left_margin">45dp</dimen>

@@ -135,9 +135,3 @@ class TripActivityComparator implements Comparator<TripData> {
         return t1.getActivity() - t2.getActivity();
     }
 }
-
-class TripFavouriteComparator implements Comparator<TripData> {
-    public int compare(TripData t1, TripData t2) {
-        return t2.getFav() - t1.getFav();
-    }
-}

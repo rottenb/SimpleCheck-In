@@ -17,6 +17,8 @@ import java.util.List;
  */
 
 public class TripDataAdapter extends ArrayAdapter<TripData> {
+    final static String LOG_TAG = NewTripDialog.class.getSimpleName();
+
     public TripDataAdapter(Context context, List<TripData> tripData) {
         super(context, 0, tripData);
     }
@@ -35,12 +37,10 @@ public class TripDataAdapter extends ArrayAdapter<TripData> {
         // Get the views of the list
         TextView title = (TextView) convertView.findViewById(R.id.trip_list_item_textview);
         ImageView activity = (ImageView) convertView.findViewById(R.id.trip_list_activity_type);
-        ImageView fav = (ImageView) convertView.findViewById(R.id.trip_list_fav);
 
         // Populate the views with data
         title.setText(td.getTitle());
         activity.setBackgroundResource(td.getActivityIcon());
-        fav.setImageResource(td.getFavIcon());
 
         return convertView;
     }

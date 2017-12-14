@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 /**
  * Created by rot on 2017-12-07.
@@ -36,6 +39,7 @@ public class TripDetailActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+
         final TripDataBase tripDataBase = new TripDataBase(this);
         final TripData tripData;
 
@@ -43,10 +47,11 @@ public class TripDetailActivity extends AppCompatActivity {
 
         // Bring up data or create new
         if (getIntent().getStringExtra("TITLE") == null) {
-            DialogFragment ntd = new NewTripDialog();
-            ntd.show(getFragmentManager(), "Trip Details");
-
             tripData = new TripData();
+
+            LinearLayout linLayout = (LinearLayout) findViewById(R.id.detail_linear_layout);
+            linLayout.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
+
 
         } else {
             tripData = tripDataBase.getTrip(getIntent().getStringExtra("TITLE"));
@@ -56,7 +61,7 @@ public class TripDetailActivity extends AppCompatActivity {
         ((EditText) findViewById(R.id.trip_title)).setText(tripData.getTitle());
 
         // Who's going
-        ((EditText) findViewById(R.id.trip_who)).setText(tripData.getWho());
+        ((TextView) findViewById(R.id.trip_who)).setText(tripData.getWho());
 
         // Activity type
         Spinner activitySpinner = (Spinner) findViewById(R.id.trip_activity);
@@ -89,6 +94,18 @@ public class TripDetailActivity extends AppCompatActivity {
                 break;
             default:
         }
+
+        ImageView mapImg = (ImageView) findViewById(R.id.trip_map_img);
+        mapImg.setImageResource(tripData.getMapDrawable());
+
+        TextView who = (TextView) findViewById(R.id.trip_who);
+        who.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                DialogFragment dialog = new PartnerChooserDialog();
+                dialog.show(getFragmentManager(), "Choose Partners");
+            }
+        });
+
 
         Button saveButton = (Button) findViewById(R.id.trip_save_button);
 
@@ -140,7 +157,6 @@ public class TripDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
-
 
 
         tripDataBase.close();

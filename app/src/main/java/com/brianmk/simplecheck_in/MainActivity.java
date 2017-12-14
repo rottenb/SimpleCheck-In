@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -25,10 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private List<TripData> tripDataList;
     private TripDataAdapter tripDataAdapter;
 
-    //private int mPosition = 0;
-    private boolean bFavouriteOnTop = false;
-
     final int EDIT_REQUEST_CODE = 100;
+    final int NEW_TITLE_REQUEST_CODE = 200;
 
     private static int SORT_NONE = 0;
     private static int SORT_TITLE = 1;
@@ -51,8 +50,11 @@ public class MainActivity extends AppCompatActivity {
         //  trip.
         // If trips do exist, proceed as normal.
         tripDataList = tripDB.getAllTrips();
+        tripDataAdapter = new TripDataAdapter(this, tripDataList);
+
         if (tripDataList.size() == 0) {
             setContentView(R.layout.activity_main_blank);
+
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             blankTrip.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent tripDetailIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
+                    tripDetailIntent.putExtra("ACTION", "ADD");
                     startActivityForResult(tripDetailIntent, EDIT_REQUEST_CODE);
                 }
             });
@@ -67,10 +70,9 @@ public class MainActivity extends AppCompatActivity {
             tripDB.close();
         } else {
             setContentView(R.layout.activity_main);
+
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-
-            tripDataAdapter = new TripDataAdapter(this, tripDataList);
 
             ListView tripListView = (ListView) findViewById(R.id.trip_list);
             tripListView.setAdapter(tripDataAdapter);
@@ -81,56 +83,26 @@ public class MainActivity extends AppCompatActivity {
             tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //mPosition = position;
+                //mPosition = position;
 
-                    //DialogFragment dialog = new TripDialog();
-                    //Bundle args = new Bundle();
-                    //args.putString("LIST_TITLE", tripDataList.get(position).getTitle());
+                //DialogFragment dialog = new TripDialog();
+                //Bundle args = new Bundle();
+                //args.putString("LIST_TITLE", tripDataList.get(position).getTitle());
 
-                    // If failed to pull list entry from database, throw an error instead of
-                    //  going further
-                    String title = tripDataList.get(position).getTitle();
-                    if (title == null) {
-                        Toast.makeText(getApplication().getBaseContext(),
-                                "ERROR! Trip [" + title + "] not found!", Toast.LENGTH_SHORT).show();
-                    } else {
-
-                        Intent tripIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
-                        tripIntent.putExtra("TITLE", title);
-                        tripIntent.putExtra("ACTION", "SAVE");
-                        startActivityForResult(tripIntent, EDIT_REQUEST_CODE);
-/*
-                        // Make the FAB disappear
-                        final View myView = findViewById(R.id.trip_list_add);
-
-                        // get the center for the clipping circle
-                        int cx = myView.getWidth() / 2;
-                        int cy = myView.getHeight() / 2;
-
-                        // get the initial radius for the clipping circle
-                        float initialRadius = (float) Math.hypot(cx, cy);
-
-                        // create the animation (the final radius is zero)
-                        Animator anim =
-                                ViewAnimationUtils.createCircularReveal(myView, cx, cy, initialRadius, 0);
-                        anim.setDuration(200);
-
-                        // make the view invisible when the animation is done
-                        anim.addListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                super.onAnimationEnd(animation);
-                                myView.setVisibility(View.INVISIBLE);
-                            }
-                        });
-
-                        // start the animation
-                        anim.start();
-*/
-                    }
+                // If failed to pull list entry from database, throw an error instead of
+                //  going further
+                String title = tripDataList.get(position).getTitle();
+                if (title == null) {
+                    Toast.makeText(getApplication().getBaseContext(),
+                            "ERROR! Trip not found!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent tripIntent = new Intent(getApplicationContext(), TripDetailActivity.class);
+                    tripIntent.putExtra("TITLE", title);
+                    tripIntent.putExtra("ACTION", "SAVE");
+                    startActivityForResult(tripIntent, EDIT_REQUEST_CODE);
+                }
                 }
             });
-
 
             tripDB.close();
         }
@@ -162,7 +134,20 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.context_menu_delete:
                 TripDataBase tbd = new TripDataBase(this);
-                tbd.deleteTrip(tripDataList.get(menuInfo.position).getTitle());
+                String title = tripDataList.get(menuInfo.position).getTitle();
+
+                View parentLayout = findViewById(R.id.main_activity);
+                Snackbar.make(parentLayout, title + " deleted.", Snackbar.LENGTH_LONG)
+                        .setAction("UNDO", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                            }
+                        })
+                        .setActionTextColor(getColor(R.color.dark_yellow))
+                        .setDuration(10000)
+                        .show();
+
+                tbd.deleteTrip(title);
                 refreshData();
                 tbd.close();
                 if (tripDataList.size() == 0) {
@@ -183,36 +168,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == EDIT_REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                refreshData();
-            }
+        switch (requestCode) {
+            case EDIT_REQUEST_CODE:
+                if (resultCode == Activity.RESULT_OK) {
+                    refreshData();
+                }
+                break;
+            case NEW_TITLE_REQUEST_CODE:
+                Log.d(LOG_TAG, "EXIT DIALOG");
+                break;
+            default:
+                break;
         }
-/*
-        // Bring the FAB back
-        View myView = findViewById(R.id.trip_list_add);
-
-        // get the center for the clipping circle
-        int cx = myView.getWidth() / 2;
-        int cy = myView.getHeight() / 2;
-
-        // get the final radius for the clipping circle
-        float finalRadius = (float) Math.hypot(cx, cy);
-
-        // create the animator for this view (the start radius is zero)
-        Animator anim =
-                ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
-
-        // make the view visible and start the animation
-        myView.setVisibility(View.VISIBLE);
-        anim.start();
-*/
     } // onActivityResult()
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     } // onCreateOptionsMenu()
 
@@ -236,11 +209,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.sort_activity:
                 mSortType = SORT_ACTIVITY;
-                refreshData();
-                break;
-            case R.id.sort_favourites_top:
-                item.setChecked(!item.isChecked());
-                bFavouriteOnTop = !bFavouriteOnTop;
                 refreshData();
                 break;
             case R.id.main_menu_settings:
@@ -308,10 +276,6 @@ public class MainActivity extends AppCompatActivity {
             Collections.sort(tripDataList, new TripActivityComparator());
         } else if (mSortType == SORT_TITLE) {
             Collections.sort(tripDataList, new TripTitleComparator());
-        }
-
-        if (bFavouriteOnTop) {
-            Collections.sort(tripDataList, new TripFavouriteComparator());
         }
 
         // Update the list adapter
