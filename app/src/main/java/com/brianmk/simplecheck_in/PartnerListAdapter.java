@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 public class PartnerListAdapter extends ArrayAdapter<Partner> {
-    final static String LOG_TAG = NewTripDialog.class.getSimpleName();
+    final static String LOG_TAG = PartnerListAdapter.class.getSimpleName();
 
     public PartnerListAdapter(Context context, List<Partner> partners) {
         super(context, 0, partners);

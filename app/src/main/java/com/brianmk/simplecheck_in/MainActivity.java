@@ -83,12 +83,6 @@ public class MainActivity extends AppCompatActivity {
             tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //mPosition = position;
-
-                //DialogFragment dialog = new TripDialog();
-                //Bundle args = new Bundle();
-                //args.putString("LIST_TITLE", tripDataList.get(position).getTitle());
-
                 // If failed to pull list entry from database, throw an error instead of
                 //  going further
                 String title = tripDataList.get(position).getTitle();
@@ -281,7 +275,6 @@ public class MainActivity extends AppCompatActivity {
         // Update the list adapter
         tripDataAdapter.clear();
         tripDataAdapter.addAll(tripDataList);
-
 
         // Update display
         tripDataAdapter.notifyDataSetChanged();

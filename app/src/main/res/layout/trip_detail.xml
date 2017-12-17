@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-50dp"
             android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
             android:background="@null"
             android:drawableEnd="@drawable/ic_create_black_24dp"
             android:drawableTint="@color/colorPrimaryDark"
@@ -65,6 +66,7 @@
 
                     <!-- WHEN TO START -->
                     <LinearLayout
+                        android:id="@+id/trip_start"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -87,7 +89,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/detail_date_size"
+                            android:textColor="@color/dark_green"
                             android:textStyle="bold"
+                            android:textColorHint="@color/dark_green"
                             android:hint="@string/detail_date_hint"/>
                         <TextView
                             android:id="@+id/start_time"
@@ -95,12 +99,15 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
                             android:textSize="@dimen/detail_time_size"
+                            android:textColor="@color/dark_green"
                             android:textStyle="bold"
+                            android:textColorHint="@color/dark_green"
                             android:hint="@string/detail_time_hint"/>
                     </LinearLayout>
 
                     <!-- WHEN TO END -->
                     <LinearLayout
+                        android:id="@+id/trip_end"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
@@ -123,12 +130,16 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/detail_date_size"
                             android:textStyle="bold"
+                            android:textColor="@color/dark_red"
+                            android:textColorHint="@color/dark_red"
                             android:hint="@string/detail_date_hint"/>
                         <TextView
                             android:id="@+id/end_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
+                            android:textColor="@color/dark_red"
+                            android:textColorHint="@color/dark_red"
                             android:textSize="@dimen/detail_time_size"
                             android:textStyle="bold"
                             android:hint="@string/detail_time_hint"/>
@@ -156,10 +167,11 @@
 
                     <TextView
                         android:id="@+id/trip_who"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:background="@android:color/transparent"
+                        android:layout_margin="15dp"
+                        android:drawableEnd="@drawable/ic_create_black_24dp"
+                        android:drawableTint="@color/colorPrimaryDark"
                         android:textSize="@dimen/detail_heading_font_size"
                         android:textColor="@color/colorPrimaryDark"
                         android:hint="@string/detail_who_hint"/>
@@ -184,7 +196,7 @@
                         android:id="@+id/trip_activity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_margin="15dp"
                         />
                 </LinearLayout>
 
@@ -226,8 +238,8 @@
                     <ImageView
                         android:id="@+id/trip_map_img"
                         android:contentDescription="@string/detail_map_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
                         android:layout_margin="10dp"
                         android:scaleType="centerCrop"
                         android:background="@drawable/ic_landscape_black_48dp"

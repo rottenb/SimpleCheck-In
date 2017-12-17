@@ -1,8 +1,5 @@
 package com.brianmk.simplecheck_in;
 
-import java.text.DateFormat;
-import java.util.Date;
-
 /**
  * Created by rot on 2016-10-15.
  *
@@ -17,10 +14,11 @@ public class TripData {
     private String mTitle;
     private String mWho;
     private String mLocation;
-    private int mMapDrawable;
-    private String mWhenStart;
-    private String mWhenEnd;
-    private String mWhenPanic;
+    private int mMapDrawable;   // TODO: this becomes a screencap from Maps
+    private String mStartTime;
+    private String mStartDate;
+    private String mEndTime;
+    private String mEndDate;
     private int mActivity;
 
     public static final int BIKING_IDX = 0;
@@ -35,20 +33,24 @@ public class TripData {
         this.mLocation = "";
         this.mWho = "";
         this.mMapDrawable = R.drawable.ic_landscape_black_48dp;
-        this.mWhenStart = DateFormat.getDateTimeInstance().format(new Date());
-        this.mWhenEnd = DateFormat.getDateTimeInstance().format(new Date());
-        this.mWhenPanic = DateFormat.getDateTimeInstance().format(new Date());
+        this.mStartDate = "00 Dec 0000";
+        this.mStartTime = "00:00";
+        this.mEndDate = "00 Dec 0000";
+        this.mEndTime = "00:00";
+
         this.mActivity = OTHER_ACT_IDX;
     }
 
-    public TripData(String title, String location, int drawable, String who, int activity_idx, int fav) {
+    public TripData(String title, String location, int drawable, String who, String sDate, String sTime, String eDate, String eTime, int activity_idx) {
         this.mTitle = title;
         this.mLocation = location;
         this.mMapDrawable = drawable;
         this.mWho = who;
-        this.mWhenStart = DateFormat.getDateTimeInstance().format(new Date());
-        this.mWhenEnd = DateFormat.getDateTimeInstance().format(new Date());
-        this.mWhenPanic = DateFormat.getDateTimeInstance().format(new Date());
+        this.mStartDate = sDate;
+        this.mStartTime = sTime;
+        this.mEndDate = eDate;
+        this.mEndTime = eTime;
+
         this.mActivity = activity_idx;
     }
 
@@ -57,7 +59,8 @@ public class TripData {
         return "TripData [id=" + mId + ", title=" + mTitle + ", location=" + mLocation + "/n" +
                 ", drawable=" + mMapDrawable +
                 ", who=" + mWho +
-                ", start=" + mWhenStart + ", end=" + mWhenEnd + ", panic =" + mWhenPanic +
+                ", startDate=" + mStartDate + ", startTime=" + mStartTime +
+                ", endDate=" + mEndDate + ", endTime=" + mEndTime +
                 ", activity=" + mActivity +
                 "]";
     }
@@ -95,26 +98,15 @@ public class TripData {
         return mWho;
     }
 
-    public void setWhenStart(String dateTime) {
-        this.mWhenStart = dateTime;
-    }
-    public String getWhenStart() {
-        return this.mWhenStart;
-    }
+    public void setStartDate(String date) { this.mStartDate = date; }
+    public String getStartDate() { return this.mStartDate; }
+    public void setStartTime(String time) { this.mStartTime = time; }
+    public String getStartTime() { return this.mStartTime; }
 
-    public void setWhenEnd(String dateTime) {
-        this.mWhenEnd = dateTime;
-    }
-    public String getWhenEnd() {
-        return this.mWhenEnd;
-    }
-
-    public void setWhenPanic(String dateTime) {
-        this.mWhenPanic = dateTime;
-    }
-    public String getWhenPanic() {
-        return mWhenPanic;
-    }
+    public void setEndDate(String date) { this.mEndDate = date; }
+    public String getEndDate() { return this.mEndDate; }
+    public void setEndTime(String time) { this.mEndTime = time; }
+    public String getEndTime() { return this.mEndTime; }
 
     public void setActivity(int idx) {
         this.mActivity = idx;

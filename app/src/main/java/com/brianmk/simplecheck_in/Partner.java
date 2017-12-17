@@ -11,6 +11,8 @@ import java.util.List;
  */
 
 public class Partner {
+    private static final String LOG_TAG = Partner.class.getSimpleName();
+
     private String name;
     public Boolean checked;
 
@@ -24,11 +26,14 @@ public class Partner {
         this.checked = c;
     }
 
-    static public List<Partner> getPartners() {
+    static public List<Partner> getPartnerList() {
         List<Partner> partnerList = new LinkedList<>();
 
         // TODO: dream up a better way
-        Partner p = new Partner("Ryan Busto", false);
+        Partner p = new Partner("Brian Kennedy", false);
+        partnerList.add(p);
+
+        p = new Partner("Ryan Busto", false);
         partnerList.add(p);
 
         p = new Partner("Craig Hollinger", false);
@@ -37,7 +42,7 @@ public class Partner {
         p = new Partner("Eric Car", false);
         partnerList.add(p);
 
-        p = new Partner("Kay Cahill", true);
+        p = new Partner("Kay Cahill", false);
         partnerList.add(p);
 
         p = new Partner("Jon Dewald", false);
@@ -52,7 +57,7 @@ public class Partner {
         p = new Partner("Chris White", false);
         partnerList.add(p);
 
-        p = new Partner("Christine Wallace", true);
+        p = new Partner("Christine Wallace", false);
         partnerList.add(p);
 
         p = new Partner("Travis Hauk", false);
@@ -76,13 +81,13 @@ public class Partner {
         p = new Partner("Chris George", false);
         partnerList.add(p);
 
-        p = new Partner("Clayton McDonald", false);
+        p = new Partner("Clayton MacDonald", false);
         partnerList.add(p);
 
         p = new Partner("Jessica Heidleman", false);
         partnerList.add(p);
 
-        p = new Partner("Kirsten Rucker", false);
+        p = new Partner("Kirsten Ruecker", false);
         partnerList.add(p);
 
         p = new Partner("RJ Kingston", false);
@@ -104,6 +109,7 @@ public class Partner {
     }
 
     public Boolean getChecked() { return this.checked; }
+    public void setChecked(Boolean c) { this.checked = c; }
 }
 
 

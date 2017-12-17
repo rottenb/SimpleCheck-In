@@ -158,7 +158,7 @@ public class TripEditActivity extends AppCompatActivity {
     } // onResume()
 
     public void showTimePicker(View view) {
-        TimePickerFragment timePicker = new TimePickerFragment();
+        TimePickerDialog timePicker = new TimePickerDialog();
         Bundle args = new Bundle();
         args.putInt("WHEN_ID", view.getId());
 

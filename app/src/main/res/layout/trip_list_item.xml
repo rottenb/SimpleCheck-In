@@ -5,26 +5,19 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/trip_list_activity_type"
-        android:contentDescription="@string/trip_list_activity_description"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="5dp"
-        android:background="@drawable/ic_bike_black_24dp"
-        android:backgroundTint="@color/colorAccent" />
     <TextView
-        android:id="@+id/trip_list_item_textview"
+        android:id="@+id/trip_list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="5dp"
         android:gravity="center_vertical"
         android:textColor="@color/olive"
         android:textSize="@dimen/trip_display_font"
         android:textStyle="bold"
         android:text="@string/trip_list_item_default"
+        android:drawableStart="@drawable/ic_bike_black_24dp"
+        android:drawablePadding="15dp"
+        android:drawableTint="@color/colorAccent"
         android:minHeight="?android:attr/listPreferredItemHeight"/>
-
 
 </LinearLayout>

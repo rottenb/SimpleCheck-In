@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,25 +28,26 @@ public class TripDataBase extends SQLiteOpenHelper {
     private static final String KEY_LOCATION = "location";
     private static final String KEY_MAP = "map";
     private static final String KEY_WHO = "who";
-    private static final String KEY_START = "start";
-    private static final String KEY_END = "end";
-    private static final String KEY_PANIC = "panic";
+    private static final String KEY_START_TIME = "startTime";
+    private static final String KEY_START_DATE = "startDate";
+    private static final String KEY_END_TIME = "endTime";
+    private static final String KEY_END_DATE = "endDate";
     private static final String KEY_ACTIVITY = "activity";
-    private static final String KEY_FAVOURITE = "fav";
 
     private static final int ID_OFFSET = 0;
     private static final int TITLE_OFFSET = 1;
     private static final int LOCATION_OFFSET = 2;
     private static final int MAP_OFFSET = 3;
     private static final int WHO_OFFSET = 4;
-    private static final int WHEN_START_OFFSET = 5;
-    private static final int WHEN_END_OFFSET = 6;
-    private static final int WHEN_PANIC_OFFSET = 7;
-    private static final int ACTIVITY_OFFSET = 8;
-    private static final int FAVOURITE_OFFSET = 9;
+    private static final int START_DATE_OFFSET = 5;
+    private static final int START_TIME_OFFSET = 6;
+    private static final int END_DATE_OFFSET = 7;
+    private static final int END_TIME_OFFSET = 8;
+    private static final int ACTIVITY_OFFSET = 9;
 
     private static final String[] COLUMNS = {KEY_ID, KEY_TITLE, KEY_LOCATION, KEY_MAP, KEY_WHO,
-                                                KEY_START, KEY_END, KEY_PANIC, KEY_ACTIVITY, KEY_FAVOURITE};
+                                            KEY_START_DATE, KEY_START_TIME, KEY_END_DATE, KEY_END_TIME,
+                                            KEY_ACTIVITY};
 
     public TripDataBase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -62,9 +61,8 @@ public class TripDataBase extends SQLiteOpenHelper {
                 "location TEXT, " +
                 "map INTEGER, " +
                 "who TEXT, " +
-                "start TEXT, end TEXT, panic TEXT, " +
-                "activity INTEGER, " +
-                "fav INTEGER)";
+                "startDate TEXT, startTime TEXT, endDate TEXT, endTime TEXT, " +
+                "activity INTEGER)";
 
         db.execSQL(CREATE_TRIP_TABLE);
     }
@@ -98,9 +96,12 @@ public class TripDataBase extends SQLiteOpenHelper {
         values.put(KEY_LOCATION, tripData.getLocation());
         values.put(KEY_MAP, tripData.getMapDrawable());
         values.put(KEY_WHO, tripData.getWho());
-        values.put(KEY_START, tripData.getWhenStart());
-        values.put(KEY_END, tripData.getWhenEnd());
-        values.put(KEY_PANIC, tripData.getWhenPanic());
+
+        values.put(KEY_START_DATE, tripData.getStartDate());
+        values.put(KEY_START_TIME, tripData.getStartTime());
+        values.put(KEY_END_DATE, tripData.getEndDate());
+        values.put(KEY_END_TIME, tripData.getEndTime());
+
         values.put(KEY_ACTIVITY, tripData.getActivity());
 
         db.insert(TABLE_TRIPS, null, values);
@@ -139,9 +140,12 @@ public class TripDataBase extends SQLiteOpenHelper {
         tripData.setTitle(cursor.getString(LOCATION_OFFSET));
         tripData.setMapDrawable(cursor.getInt(MAP_OFFSET));
         tripData.setWho(cursor.getString(WHO_OFFSET));
-        tripData.setWhenStart(DateFormat.getDateTimeInstance().format(new Date()));
-        tripData.setWhenEnd(DateFormat.getDateTimeInstance().format(new Date()));
-        tripData.setWhenPanic(DateFormat.getDateTimeInstance().format(new Date()));
+
+        tripData.setStartDate(cursor.getString(START_DATE_OFFSET));
+        tripData.setStartTime(cursor.getString(START_TIME_OFFSET));
+        tripData.setEndDate(cursor.getString(END_DATE_OFFSET));
+        tripData.setEndTime(cursor.getString(END_TIME_OFFSET));
+
         tripData.setActivity(cursor.getInt(ACTIVITY_OFFSET));
 
         cursor.close();
@@ -176,9 +180,12 @@ public class TripDataBase extends SQLiteOpenHelper {
         tripData.setLocation(cursor.getString(LOCATION_OFFSET));
         tripData.setMapDrawable(cursor.getInt(MAP_OFFSET));
         tripData.setWho(cursor.getString(WHO_OFFSET));
-        tripData.setWhenStart(DateFormat.getDateTimeInstance().format(new Date()));
-        tripData.setWhenEnd(DateFormat.getDateTimeInstance().format(new Date()));
-        tripData.setWhenPanic(DateFormat.getDateTimeInstance().format(new Date()));
+
+        tripData.setStartDate(cursor.getString(START_DATE_OFFSET));
+        tripData.setStartTime(cursor.getString(START_TIME_OFFSET));
+        tripData.setEndDate(cursor.getString(END_DATE_OFFSET));
+        tripData.setEndTime(cursor.getString(END_TIME_OFFSET));
+
         tripData.setActivity(cursor.getInt(ACTIVITY_OFFSET));
 
         cursor.close();
@@ -204,9 +211,12 @@ public class TripDataBase extends SQLiteOpenHelper {
                 tripData.setLocation(cursor.getString(LOCATION_OFFSET));
                 tripData.setMapDrawable(cursor.getInt(MAP_OFFSET));
                 tripData.setWho(cursor.getString(WHO_OFFSET));
-                tripData.setWhenStart(DateFormat.getDateTimeInstance().format(new Date()));
-                tripData.setWhenEnd(DateFormat.getDateTimeInstance().format(new Date()));
-                tripData.setWhenPanic(DateFormat.getDateTimeInstance().format(new Date()));
+
+                tripData.setStartDate(cursor.getString(START_DATE_OFFSET));
+                tripData.setStartTime(cursor.getString(START_TIME_OFFSET));
+                tripData.setEndDate(cursor.getString(END_DATE_OFFSET));
+                tripData.setEndTime(cursor.getString(END_TIME_OFFSET));
+
                 tripData.setActivity(cursor.getInt(ACTIVITY_OFFSET));
 
                 trips.add(tripData);
@@ -274,9 +284,12 @@ public class TripDataBase extends SQLiteOpenHelper {
         values.put(KEY_LOCATION, tripData.getLocation());
         values.put(KEY_MAP, tripData.getMapDrawable());
         values.put(KEY_WHO, tripData.getWho());
-        values.put(KEY_START, tripData.getWhenStart());
-        values.put(KEY_END, tripData.getWhenEnd());
-        values.put(KEY_PANIC, tripData.getWhenPanic());
+
+        values.put(KEY_START_DATE, tripData.getStartDate());
+        values.put(KEY_START_TIME, tripData.getStartTime());
+        values.put(KEY_END_DATE, tripData.getEndDate());
+        values.put(KEY_END_TIME, tripData.getEndTime());
+
         values.put(KEY_ACTIVITY, tripData.getActivity());
 
         db.replace(TABLE_TRIPS, null, values);

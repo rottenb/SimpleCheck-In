@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
  */
 
 public class TripDataAdapter extends ArrayAdapter<TripData> {
-    final static String LOG_TAG = NewTripDialog.class.getSimpleName();
+    final static String LOG_TAG = TripDataAdapter.class.getSimpleName();
 
     public TripDataAdapter(Context context, List<TripData> tripData) {
         super(context, 0, tripData);
@@ -35,12 +34,14 @@ public class TripDataAdapter extends ArrayAdapter<TripData> {
         }
 
         // Get the views of the list
-        TextView title = (TextView) convertView.findViewById(R.id.trip_list_item_textview);
-        ImageView activity = (ImageView) convertView.findViewById(R.id.trip_list_activity_type);
+        TextView title = (TextView) convertView.findViewById(R.id.trip_list_item);
+        //ImageView activity = (ImageView) convertView.findViewById(R.id.trip_list_activity_type);
+
 
         // Populate the views with data
         title.setText(td.getTitle());
-        activity.setBackgroundResource(td.getActivityIcon());
+        title.setCompoundDrawablesWithIntrinsicBounds(td.getActivityIcon(), 0, 0, 0);
+        //activity.setBackgroundResource(td.getActivityIcon());
 
         return convertView;
     }
